@@ -66,3 +66,21 @@ Thumbs.db
 !.dev.vars.example
 
 !.env.example
+
+# docs
+docs/roadmap.md
+docs/project-overview.md
+
+# cache
+.cache/
+.turbo/
+
+# logs
+*.log
+
+# env
+.env
+.env.local
+
+# typescript
+*.tsbuildinfo
