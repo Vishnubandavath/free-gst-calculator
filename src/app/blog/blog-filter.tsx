@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Search, Calendar, User, ArrowRight, Tag } from 'lucide-react';
+import { Search, Calendar, ArrowRight, Tag } from 'lucide-react';
 import { BlogPost } from '@/lib/blog';
 import { cn } from '@/lib/utils';
 

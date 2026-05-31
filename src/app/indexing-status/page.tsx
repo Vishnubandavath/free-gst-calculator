@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { ShieldAlert, CheckCircle2, AlertTriangle, BarChart3, Search, Globe, FileText, Zap } from 'lucide-react';
+import { ShieldAlert, CheckCircle2, AlertTriangle, Search, Globe, FileText } from 'lucide-react';
 
 export default function IndexingStatusPage() {
   const [status, setStatus] = useState({

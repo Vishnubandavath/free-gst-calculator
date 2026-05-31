@@ -1,6 +1,6 @@
 import React from 'react';
 import { Metadata } from 'next';
-import { Percent, ArrowRight, Calculator as CalcIcon } from 'lucide-react';
+import { Percent, Calculator as CalcIcon } from 'lucide-react';
 import Link from 'next/link';
 import { Breadcrumbs } from '@/components/breadcrumbs';
 
@@ -32,7 +32,7 @@ export default function GSTExclusiveFormulaPage() {
           <section className="space-y-6">
             <h2 className="text-3xl font-bold text-slate-900 dark:text-white">What is GST Exclusive?</h2>
             <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-              "GST Exclusive" refers to the value of a product or service before any tax has been added. In the business world, prices are almost always quoted as exclusive of tax. The buyer is then responsible for paying the base price plus the applicable GST amount. This method is straightforward and is the primary way tax is calculated on invoices.
+              &ldquo;GST Exclusive&rdquo; refers to the value of a product or service before any tax has been added. In the business world, prices are almost always quoted as exclusive of tax. The buyer is then responsible for paying the base price plus the applicable GST amount. This method is straightforward and is the primary way tax is calculated on invoices.
             </p>
           </section>
 
@@ -40,11 +40,11 @@ export default function GSTExclusiveFormulaPage() {
             <h3 className="text-2xl font-bold text-cyan-400">The Mathematical Formula</h3>
             <div className="space-y-6 font-mono text-lg md:text-xl">
               <div className="p-6 bg-white/5 rounded-2xl border border-white/10">
-                <p className="text-slate-400 mb-2">// To find the GST Amount:</p>
+                <p className="text-slate-400 mb-2">{"// To find the GST Amount:"}</p>
                 <p className="text-indigo-300">GST Amount = (Base Price * GST Rate) / 100</p>
               </div>
               <div className="p-6 bg-white/5 rounded-2xl border border-white/10">
-                <p className="text-slate-400 mb-2">// To find the Total Price (Inclusive):</p>
+                <p className="text-slate-400 mb-2">{"// To find the Total Price (Inclusive):"}</p>
                 <p className="text-cyan-300">Total Amount = Base Price + GST Amount</p>
               </div>
             </div>
@@ -54,7 +54,7 @@ export default function GSTExclusiveFormulaPage() {
             <h2 className="text-3xl font-bold text-slate-900 dark:text-white">Step-by-Step Example</h2>
             <div className="p-8 glass-card rounded-3xl space-y-6">
               <p className="text-lg text-slate-600 dark:text-slate-400">
-                Let's say you are selling professional services for <strong>₹50,000</strong>, and the GST rate is <strong>18%</strong>.
+                Let&apos;s say you are selling professional services for <strong>₹50,000</strong>, and the GST rate is <strong>18%</strong>.
               </p>
               <div className="space-y-4">
                 <div className="flex items-start gap-4">

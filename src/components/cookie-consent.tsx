@@ -2,13 +2,39 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShieldCheck, X, Settings, Check } from 'lucide-react';
+import { ShieldCheck, X, Settings } from 'lucide-react';
 import { cn } from '@/lib/utils';
+
+interface CookiePreferences {
+  essential: boolean;
+  analytics: boolean;
+  marketing: boolean;
+}
+
+const applyConsent = (prefs: CookiePreferences) => {
+  // Google Consent Mode v2 placeholder
+  if (typeof window !== 'undefined' && 'gtag' in window) {
+    type GtagFunction = (
+      command: string,
+      action: string,
+      params: Record<string, string>
+    ) => void;
+
+    const gtag = (window as { gtag: GtagFunction }).gtag;
+    gtag('consent', 'update', {
+      'ad_storage': prefs.marketing ? 'granted' : 'denied',
+      'analytics_storage': prefs.analytics ? 'granted' : 'denied',
+      'ad_user_data': prefs.marketing ? 'granted' : 'denied',
+      'ad_personalization': prefs.marketing ? 'granted' : 'denied',
+    });
+  }
+  console.log('Consent applied:', prefs);
+};
 
 export function CookieConsent() {
   const [showBanner, setShowBanner] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
-  const [preferences, setPreferences] = useState({
+  const [preferences, setPreferences] = useState<CookiePreferences>({
     essential: true,
     analytics: true,
     marketing: true,
@@ -24,19 +50,6 @@ export function CookieConsent() {
       applyConsent(savedPrefs);
     }
   }, []);
-
-  const applyConsent = (prefs: typeof preferences) => {
-    // Google Consent Mode v2 placeholder
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('consent', 'update', {
-        'ad_storage': prefs.marketing ? 'granted' : 'denied',
-        'analytics_storage': prefs.analytics ? 'granted' : 'denied',
-        'ad_user_data': prefs.marketing ? 'granted' : 'denied',
-        'ad_personalization': prefs.marketing ? 'granted' : 'denied',
-      });
-    }
-    console.log('Consent applied:', prefs);
-  };
 
   const handleAcceptAll = () => {
     const allAccepted = { essential: true, analytics: true, marketing: true };
@@ -74,28 +87,28 @@ export function CookieConsent() {
             <div className="w-16 h-16 bg-indigo-600/10 text-indigo-600 rounded-2xl flex items-center justify-center shrink-0">
               <ShieldCheck size={32} />
             </div>
-            
+
             <div className="flex-1 space-y-2 text-center md:text-left">
               <h4 className="text-xl font-bold text-slate-900 dark:text-white">We value your privacy</h4>
               <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
-                We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.
+                We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking &ldquo;Accept All&rdquo;, you consent to our use of cookies.
               </p>
             </div>
 
             <div className="flex flex-wrap justify-center gap-3">
-              <button 
+              <button
                 onClick={() => setShowSettings(true)}
                 className="px-6 py-3 rounded-xl font-bold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all flex items-center gap-2"
               >
                 <Settings size={18} /> Customize
               </button>
-              <button 
+              <button
                 onClick={handleRejectAll}
                 className="px-6 py-3 rounded-xl font-bold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
               >
                 Reject All
               </button>
-              <button 
+              <button
                 onClick={handleAcceptAll}
                 className="px-8 py-3 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-500/20"
               >
@@ -108,7 +121,7 @@ export function CookieConsent() {
 
       {showSettings && (
         <div className="fixed inset-0 z-[110] flex items-center justify-center p-6 bg-slate-950/40 backdrop-blur-sm">
-          <motion.div 
+          <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             className="glass-card w-full max-w-lg rounded-[2.5rem] overflow-hidden"
@@ -119,7 +132,7 @@ export function CookieConsent() {
                 <X size={24} />
               </button>
             </div>
-            
+
             <div className="p-8 space-y-6">
               {[
                 { id: 'essential', title: 'Essential Cookies', desc: 'Required for the website to function properly.', required: true },
@@ -150,13 +163,13 @@ export function CookieConsent() {
             </div>
 
             <div className="p-8 bg-slate-50 dark:bg-slate-900/50 flex gap-4">
-              <button 
+              <button
                 onClick={() => setShowSettings(false)}
                 className="flex-1 py-4 font-bold text-slate-600"
               >
                 Cancel
               </button>
-              <button 
+              <button
                 onClick={handleSavePreferences}
                 className="flex-1 py-4 bg-slate-900 text-white rounded-2xl font-bold hover:bg-slate-800 transition-all shadow-xl"
               >

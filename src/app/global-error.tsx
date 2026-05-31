@@ -10,6 +10,10 @@ export default function GlobalError({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  React.useEffect(() => {
+    console.error(error);
+  }, [error]);
+
   return (
     <html lang="en" className="dark">
       <body className="min-h-screen bg-slate-950 text-slate-100 flex items-center justify-center font-sans antialiased p-4">

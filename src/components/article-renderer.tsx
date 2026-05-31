@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useRouter } from 'next/navigation';
-import { Percent, ArrowRightLeft, Calculator, HelpCircle } from 'lucide-react';
+import { ArrowRightLeft, Calculator } from 'lucide-react';
 import { calculateGST, formatCurrency } from '@/lib/gst-logic';
 import { cn } from '@/lib/utils';
 import { GST_RATES } from '@/lib/config';

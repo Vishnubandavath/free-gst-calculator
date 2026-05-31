@@ -1,6 +1,6 @@
 import React from 'react';
 import { Metadata } from 'next';
-import { HelpCircle, Plus, Minus, Search } from 'lucide-react';
+import { HelpCircle } from 'lucide-react';
 import { Breadcrumbs } from '@/components/breadcrumbs';
 import { homeFaqs } from '@/data/home-content';
 
@@ -81,7 +81,7 @@ export default function GSTFAQPage() {
         <section className="bg-slate-50 dark:bg-slate-900 p-8 md:p-12 rounded-[2.5rem] border border-slate-200 dark:border-slate-800 text-center space-y-6">
           <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Still have more questions?</h2>
           <p className="text-slate-600 dark:text-slate-400">
-            Contact us at <a href="mailto:support@vsnexos.com" className="text-indigo-600 font-bold">support@vsnexos.com</a> and we'll be happy to help you.
+            Contact us at <a href="mailto:support@vsnexos.com" className="text-indigo-600 font-bold">support@vsnexos.com</a> and we&apos;ll be happy to help you.
           </p>
         </section>
       </div>

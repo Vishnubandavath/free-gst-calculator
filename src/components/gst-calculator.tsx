@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Calculator, Copy, RefreshCw, Share2, Download, Check, Info, ArrowRightLeft } from 'lucide-react';
+import { Calculator, RefreshCw, Share2, Download, Check, ArrowRightLeft } from 'lucide-react';
 import { calculateGST, formatCurrency } from '@/lib/gst-logic';
 import { cn } from '@/lib/utils';
 import { GST_RATES } from '@/lib/config';
@@ -23,7 +23,6 @@ export function GSTCalculator() {
   const [rate, setRate] = useState<number>(18);
   const [type, setType] = useState<'exclusive' | 'inclusive'>('exclusive');
   const [isInterState, setIsInterState] = useState(false);
-  const [copied, setCopied] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [reportId, setReportId] = useState<string>('');
   const pdfRef = useRef<HTMLDivElement>(null);
@@ -87,8 +86,6 @@ Total Amount: ${formatCurrency(result.totalAmount)}
 Calculated via VSNEXOS GST Calculator`;
     
     navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
     confetti({
       particleCount: 100,
       spread: 70,
@@ -97,13 +94,7 @@ Calculated via VSNEXOS GST Calculator`;
     });
   };
 
-  const handlePrint = () => {
-    const originalTitle = document.title;
-    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-    document.title = `gst-calculation-${timestamp}`;
-    window.print();
-    document.title = originalTitle;
-  };
+
 
   const handleShare = async () => {
     const text = `GST Calculation Result:

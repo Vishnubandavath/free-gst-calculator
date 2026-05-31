@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
-import { Plus, Trash2, Download, RefreshCw, FileText, Check, AlertTriangle, ArrowRightLeft } from 'lucide-react';
+import { Plus, Trash2, Download, RefreshCw, FileText, AlertTriangle, ArrowRightLeft } from 'lucide-react';
 import { calculateLineItem, formatCurrency } from '@/lib/gst-logic';
 import { cn } from '@/lib/utils';
 import { GST_RATES } from '@/lib/config';

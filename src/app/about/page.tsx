@@ -66,7 +66,7 @@ export default function AboutPage() {
               <h4 className="text-xl font-bold">The VSNEXOS Vision</h4>
             </div>
             <p className="text-slate-600 dark:text-slate-400 italic text-lg leading-relaxed">
-              "To empower every Indian entrepreneur with the tools they need to succeed in a digital-first economy."
+              &ldquo;To empower every Indian entrepreneur with the tools they need to succeed in a digital-first economy.&rdquo;
             </p>
           </div>
         </div>

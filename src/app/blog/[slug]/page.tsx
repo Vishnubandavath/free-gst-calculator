@@ -2,7 +2,7 @@ import React from 'react';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { Calendar, User, ArrowLeft, Tag, BookOpen, Calculator, FileText } from 'lucide-react';
+import { Calendar, ArrowLeft, Tag, BookOpen, Calculator, FileText } from 'lucide-react';
 import { getPostBySlug, getAllPosts } from '@/lib/blog';
 import { ArticleRenderer } from '@/components/article-renderer';
 import { Breadcrumbs } from '@/components/breadcrumbs';
