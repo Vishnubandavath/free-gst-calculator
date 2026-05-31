@@ -4,13 +4,15 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Calculator, BookOpen, HelpCircle, Info, Mail, Tag } from 'lucide-react';
+import { Menu, X, Calculator, BookOpen, HelpCircle, Info, Mail, Tag, FileText } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const navLinks = [
   { name: 'Home', href: '/', icon: Calculator },
   { name: 'GST Calculator', href: '/gst-calculator', icon: Calculator },
+  { name: 'Invoice Generator', href: '/invoice-generator', icon: FileText },
   { name: 'GST Guide', href: '/gst-guide', icon: BookOpen },
+  { name: 'Blog', href: '/blog', icon: BookOpen },
   { name: 'GST Slabs', href: '/gst-slabs-india', icon: Tag },
   { name: 'FAQ', href: '/gst-faq', icon: HelpCircle },
 ];

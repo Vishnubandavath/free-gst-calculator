@@ -3,7 +3,9 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Trash2, Download, FileSpreadsheet, RefreshCw, Calculator, Percent } from 'lucide-react';
-import { formatCurrency } from '@/lib/gst-logic';
+import { formatCurrency, calculateLineItem } from '@/lib/gst-logic';
+import { GST_RATES } from '@/lib/config';
+import { SummaryCard } from '@/components/ui/summary-card';
 
 interface InvoiceItem {
   id: string;
@@ -19,6 +21,8 @@ export function AdvancedGSTCalculator() {
     { id: 'item-1', description: 'Item 1', quantity: 1, price: 0, gstRate: 18, discount: 0 }
   ]);
   const [mounted, setMounted] = useState(false);
+  const [isComposition, setIsComposition] = useState(false);
+  const [compositionRate, setCompositionRate] = useState<number>(1);
 
   React.useEffect(() => {
     setMounted(true);
@@ -64,24 +68,16 @@ export function AdvancedGSTCalculator() {
   };
 
   const calculateLineTotal = (item: InvoiceItem) => {
-    const qty = Math.max(0, typeof item.quantity === 'string' ? parseFloat(item.quantity) || 0 : item.quantity);
-    const prc = Math.max(0, typeof item.price === 'string' ? parseFloat(item.price) || 0 : item.price);
-    const disc = Math.min(100, Math.max(0, typeof item.discount === 'string' ? parseFloat(item.discount) || 0 : item.discount));
-
-    const lineTotal = qty * prc;
-    const discountAmount = (lineTotal * disc) / 100;
-    const taxableAmount = lineTotal - discountAmount;
-    const gstAmount = (taxableAmount * item.gstRate) / 100;
-    return {
-      taxableAmount,
-      gstAmount,
-      discountAmount,
-      total: taxableAmount + gstAmount
-    };
+    return calculateLineItem({
+      quantity: typeof item.quantity === 'string' ? parseFloat(item.quantity) || 0 : item.quantity,
+      price: typeof item.price === 'string' ? parseFloat(item.price) || 0 : item.price,
+      gstRate: isComposition ? 0 : item.gstRate,
+      discount: typeof item.discount === 'string' ? parseFloat(item.discount) || 0 : item.discount
+    }, false);
   };
 
   const calculateTotals = () => {
-    return items.reduce((acc, item) => {
+    const rawTotals = items.reduce((acc, item) => {
       const line = calculateLineTotal(item);
       return {
         totalTaxable: acc.totalTaxable + line.taxableAmount,
@@ -90,24 +86,46 @@ export function AdvancedGSTCalculator() {
         grandTotal: acc.grandTotal + line.total
       };
     }, { totalTaxable: 0, totalGST: 0, totalDiscount: 0, grandTotal: 0 });
+
+    if (isComposition) {
+      const compTax = (rawTotals.totalTaxable * compositionRate) / 100;
+      return {
+        totalTaxable: rawTotals.totalTaxable,
+        totalGST: compTax,
+        totalDiscount: rawTotals.totalDiscount,
+        grandTotal: rawTotals.totalTaxable
+      };
+    }
+
+    return rawTotals;
   };
 
   const totals = calculateTotals();
 
   const exportCSV = () => {
-    const headers = ['Description', 'Qty', 'Price', 'GST %', 'Discount %', 'Taxable', 'GST', 'Total'];
+    const headers = isComposition
+      ? ['Description', 'Qty', 'Price', 'Discount %', 'Total']
+      : ['Description', 'Qty', 'Price', 'GST %', 'Discount %', 'Taxable', 'GST', 'Total'];
     const rows = items.map(item => {
       const line = calculateLineTotal(item);
-      return [
-        item.description,
-        item.quantity,
-        item.price,
-        item.gstRate,
-        item.discount,
-        line.taxableAmount.toFixed(2),
-        line.gstAmount.toFixed(2),
-        line.total.toFixed(2)
-      ];
+      return isComposition
+        ? [
+            item.description,
+            item.quantity,
+            item.price,
+            item.discount,
+            line.taxableAmount.toFixed(2)
+          ]
+        : [
+            item.description,
+            item.quantity,
+            item.price,
+            item.gstRate,
+            item.discount,
+            line.taxableAmount.toFixed(2),
+            line.gstAmount.toFixed(2),
+            line.total.toFixed(2)
+          ];
     });
 
     const csvContent = [headers, ...rows].map(e => e.join(",")).join("\n");
@@ -141,7 +159,35 @@ export function AdvancedGSTCalculator() {
             </div>
             <h3 className="text-xl font-bold text-slate-900 dark:text-white">Multi-Item GST Table</h3>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-6">
+            <div className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                id="isComposition"
+                checked={isComposition}
+                onChange={(e) => setIsComposition(e.target.checked)}
+                className="w-4 h-4 text-indigo-600 border-slate-300 rounded focus:ring-indigo-500 focus:ring-2 cursor-pointer"
+              />
+              <label htmlFor="isComposition" className="text-xs font-bold text-slate-700 dark:text-slate-300 cursor-pointer select-none">
+                Composition Taxpayer?
+              </label>
+            </div>
+            
+            {isComposition && (
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-bold text-slate-500">Tax Rate:</span>
+                <select
+                  value={compositionRate}
+                  onChange={(e) => setCompositionRate(parseFloat(e.target.value))}
+                  className="bg-slate-100 dark:bg-slate-800 border-none rounded-lg px-2 py-1 text-xs font-bold focus:ring-2 focus:ring-indigo-500/20"
+                >
+                  <option value={1}>1% (Traders/Mfg)</option>
+                  <option value={5}>5% (Restaurants)</option>
+                  <option value={6}>6% (Services)</option>
+                </select>
+              </div>
+            )}
+
             <button
               onClick={addItem}
               className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-xl text-sm font-bold hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-500/20"
@@ -165,7 +211,7 @@ export function AdvancedGSTCalculator() {
                 <th className="px-6 py-4">Description</th>
                 <th className="px-6 py-4 w-24">Qty</th>
                 <th className="px-6 py-4 w-32">Price (₹)</th>
-                <th className="px-6 py-4 w-28">GST %</th>
+                {!isComposition && <th className="px-6 py-4 w-28">GST %</th>}
                 <th className="px-6 py-4 w-28">Discount %</th>
                 <th className="px-6 py-4 w-32 text-right">Total (₹)</th>
                 <th className="px-6 py-4 w-16"></th>
@@ -207,17 +253,19 @@ export function AdvancedGSTCalculator() {
                         className="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-lg px-2 py-1 text-sm focus:ring-2 focus:ring-indigo-500/20"
                       />
                     </td>
-                    <td className="px-6 py-4">
-                      <select
-                        value={item.gstRate}
-                        onChange={(e) => updateItem(item.id, 'gstRate', parseInt(e.target.value))}
-                        className="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-lg px-2 py-1 text-sm focus:ring-2 focus:ring-indigo-500/20"
-                      >
-                        {[0, 3, 5, 12, 18, 28].map(r => (
-                          <option key={r} value={r}>{r}%</option>
-                        ))}
-                      </select>
-                    </td>
+                    {!isComposition && (
+                      <td className="px-6 py-4">
+                        <select
+                          value={item.gstRate}
+                          onChange={(e) => updateItem(item.id, 'gstRate', parseInt(e.target.value))}
+                          className="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-lg px-2 py-1 text-sm focus:ring-2 focus:ring-indigo-500/20"
+                        >
+                          {GST_RATES.map(r => (
+                            <option key={r} value={r}>{r}%</option>
+                          ))}
+                        </select>
+                      </td>
+                    )}
                     <td className="px-6 py-4">
                       <input
                         type="number"
@@ -285,29 +333,28 @@ export function AdvancedGSTCalculator() {
         </div>
 
         <div className="lg:col-span-5">
-          <div className="bg-indigo-600 rounded-[2.5rem] p-8 text-white shadow-2xl shadow-indigo-500/40 sticky top-8">
-            <h4 className="text-xl font-bold mb-8 flex items-center gap-2">
-              <Calculator size={20} /> Final Summary
-            </h4>
-            <div className="space-y-6">
-              <div className="flex justify-between items-center text-indigo-100">
-                <span>Taxable Amount</span>
-                <span className="font-bold text-white">{formatCurrency(totals.totalTaxable)}</span>
-              </div>
-              <div className="flex justify-between items-center text-indigo-100">
-                <span>Total GST</span>
-                <span className="font-bold text-white">{formatCurrency(totals.totalGST)}</span>
-              </div>
-              <div className="flex justify-between items-center text-indigo-100">
-                <span>Total Discount</span>
-                <span className="font-bold text-white text-emerald-400">-{formatCurrency(totals.totalDiscount)}</span>
-              </div>
-              <div className="pt-6 border-t border-white/10 flex justify-between items-center">
-                <span className="text-lg font-bold">Grand Total</span>
-                <span className="text-3xl font-black">{formatCurrency(totals.grandTotal)}</span>
-              </div>
-            </div>
-          </div>
+          <SummaryCard
+            title="Final Summary"
+            icon={<Calculator size={20} />}
+            className="sticky top-8"
+            rows={[
+              { label: 'Taxable Amount', value: totals.totalTaxable },
+              {
+                label: isComposition ? `Composition Tax (${compositionRate}%)` : 'Total GST',
+                value: totals.totalGST,
+                highlightColor: isComposition ? 'text-indigo-200' : undefined
+              },
+              { label: 'Total Discount', value: totals.totalDiscount, isDiscount: true },
+              { label: 'Grand Total', value: totals.grandTotal, isBold: true }
+            ]}
+            actions={
+              isComposition && (
+                <p className="text-[10px] text-indigo-200/80 leading-relaxed border-t border-white/10 pt-4 mt-2">
+                  * Note: Composition tax must be paid directly by the supplier. It is not collected from or charged to the buyer on the Bill of Supply.
+                </p>
+              )
+            }
+          />
         </div>
       </div>
     </div>
@@ -319,9 +366,16 @@ export function AdvancedGSTCalculator() {
             <h1 className="text-3xl font-black tracking-tight">VSNEXOS</h1>
             <p className="text-slate-500 font-bold uppercase tracking-widest text-xs mt-1">Advanced GST Calculator</p>
           </div>
-          <div className="text-right">
-            <p className="text-sm font-bold text-slate-500">INVOICE SUMMARY</p>
+          <div className="text-right space-y-1">
+            <p className="text-sm font-bold text-slate-500">
+              {isComposition ? 'BILL OF SUPPLY' : 'INVOICE SUMMARY'}
+            </p>
             <p className="text-xs text-slate-400">{mounted ? new Date().toLocaleString('en-IN') : ''}</p>
+            {isComposition && (
+              <p className="text-[9px] font-black text-slate-900 border border-slate-900 px-2 py-0.5 mt-1 rounded uppercase tracking-wider text-center">
+                Composition taxable person, not eligible to collect tax on supplies
+              </p>
+            )}
           </div>
         </div>
 
@@ -331,7 +385,7 @@ export function AdvancedGSTCalculator() {
               <th className="py-4">Description</th>
               <th className="py-4 w-16">Qty</th>
               <th className="py-4 w-24">Price</th>
-              <th className="py-4 w-16">GST</th>
+              {!isComposition && <th className="py-4 w-16">GST</th>}
               <th className="py-4 w-16">Disc</th>
               <th className="py-4 w-28 text-right">Total</th>
             </tr>
@@ -344,7 +398,7 @@ export function AdvancedGSTCalculator() {
                   <td className="py-4 font-medium">{item.description}</td>
                   <td className="py-4">{item.quantity}</td>
                   <td className="py-4">{formatCurrency(typeof item.price === 'string' ? parseFloat(item.price) || 0 : item.price)}</td>
-                  <td className="py-4">{item.gstRate}%</td>
+                  {!isComposition && <td className="py-4">{item.gstRate}%</td>}
                   <td className="py-4">{item.discount}%</td>
                   <td className="py-4 text-right font-bold">{formatCurrency(line.total)}</td>
                 </tr>
@@ -354,14 +408,19 @@ export function AdvancedGSTCalculator() {
         </table>
 
         <div className="flex justify-end pt-8">
-          <div className="w-64 space-y-4 bg-slate-50 p-6 rounded-2xl">
+          <div className="w-72 space-y-4 bg-slate-50 p-6 rounded-2xl">
             <div className="flex justify-between text-xs font-bold text-slate-400 uppercase">
               <span>Taxable Amount</span>
               <span className="text-slate-900">{formatCurrency(totals.totalTaxable)}</span>
             </div>
             <div className="flex justify-between text-xs font-bold text-slate-400 uppercase">
-              <span>Total GST</span>
-              <span className="text-slate-900">{formatCurrency(totals.totalGST)}</span>
+              <span>
+                {isComposition ? `Composition Tax (${compositionRate}%)` : 'Total GST'}
+              </span>
+              <span className="text-slate-900">
+                {formatCurrency(totals.totalGST)}
+                {isComposition && <span className="text-[8px] font-normal text-slate-400 ml-1">(Paid by Supplier)</span>}
+              </span>
             </div>
             <div className="flex justify-between text-xs font-bold text-slate-400 uppercase">
               <span>Total Discount</span>
@@ -373,6 +432,12 @@ export function AdvancedGSTCalculator() {
             </div>
           </div>
         </div>
+
+        {isComposition && (
+          <div className="text-[10px] text-slate-500 italic text-center max-w-md mx-auto pt-4 leading-relaxed">
+            * Note: This document is a Bill of Supply issued in compliance with section 31(3)(c) of the CGST Act, 2017. Tax is not collected from the recipient.
+          </div>
+        )}
 
         <div className="pt-12 border-t border-slate-100 text-center">
           <p className="text-xs text-slate-400">Generated via free-gst-calculator.vsnexos.com</p>

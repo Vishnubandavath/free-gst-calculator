@@ -1,14 +1,4 @@
-You are a Staff Software Engineer, Security Reviewer, QA Lead, UX Auditor, Performance Engineer, and Product Architect.
-
-Your task is to perform a complete audit of this website/application.
-
-DO NOT assume the code is correct.
-DO NOT only review architecture.
-Inspect implementation details, user flows, edge cases, and business logic.
-
-========================================
-AUDIT OBJECTIVES
-========================================
+## AUDIT OBJECTIVES
 
 Review the application from the following perspectives:
 
@@ -222,7 +212,7 @@ Check:
 OUTPUT FORMAT
 ========================================
 
-# Executive Summary
+## Executive Summary
 
 Overall Score: X/10
 
@@ -231,11 +221,11 @@ High Issues: X
 Medium Issues: X
 Low Issues: X
 
-# Critical Findings
+## Critical Findings
 
 (List all critical findings)
 
-# Detailed Findings
+## Detailed Findings
 
 For every issue:
 
@@ -248,19 +238,19 @@ Impact:
 Root Cause:
 Recommended Fix:
 
-# Quick Wins
+## Quick Wins
 
 (High impact, low effort improvements)
 
-# Refactor Opportunities
+## Refactor Opportunities
 
 (Architecture and maintainability improvements)
 
-# Production Readiness Assessment
+## Production Readiness Assessment
 
 What prevents safe production deployment?
 
-# Prioritized Action Plan
+## Prioritized Action Plan
 
 1. Fix immediately
 2. Fix next sprint
