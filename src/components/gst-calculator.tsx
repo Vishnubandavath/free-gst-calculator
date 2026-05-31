@@ -1,15 +1,15 @@
 'use client';
 
-import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Calculator, Copy, RefreshCw, Share2, Download, Check, Info, ArrowRightLeft } from 'lucide-react';
-import { calculateGST, formatCurrency, formatNumber } from '@/lib/gst-logic';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
+import { Calculator, RefreshCw, Share2, Download, Check, ArrowRightLeft } from 'lucide-react';
+import { calculateGST, formatCurrency } from '@/lib/gst-logic';
 import { cn } from '@/lib/utils';
+import { GST_RATES } from '@/lib/config';
+import { NumberInputField } from '@/components/ui/number-input-field';
 import confetti from 'canvas-confetti';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas-pro';
-
-const GST_RATES = [0, 3, 5, 12, 18, 28];
 
 const generateReportId = () => {
   const now = new Date();
@@ -23,7 +23,6 @@ export function GSTCalculator() {
   const [rate, setRate] = useState<number>(18);
   const [type, setType] = useState<'exclusive' | 'inclusive'>('exclusive');
   const [isInterState, setIsInterState] = useState(false);
-  const [copied, setCopied] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [reportId, setReportId] = useState<string>('');
   const pdfRef = useRef<HTMLDivElement>(null);
@@ -87,8 +86,6 @@ Total Amount: ${formatCurrency(result.totalAmount)}
 Calculated via VSNEXOS GST Calculator`;
     
     navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
     confetti({
       particleCount: 100,
       spread: 70,
@@ -97,13 +94,7 @@ Calculated via VSNEXOS GST Calculator`;
     });
   };
 
-  const handlePrint = () => {
-    const originalTitle = document.title;
-    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-    document.title = `gst-calculation-${timestamp}`;
-    window.print();
-    document.title = originalTitle;
-  };
+
 
   const handleShare = async () => {
     const text = `GST Calculation Result:
@@ -169,25 +160,14 @@ Calculated via VSNEXOS GST Calculator`;
           </div>
 
           {/* Amount Input */}
-          <div className="space-y-3">
-            <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-2">
-              Amount (₹)
-              <span className="text-xs font-normal text-slate-400">(Enter total amount)</span>
-            </label>
-            <div className="relative group">
-              <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-indigo-500 transition-colors">
-                <span className="text-xl font-medium">₹</span>
-              </div>
-              <input
-                type="number"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-                placeholder="0.00"
-                className="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-2xl pl-10 pr-4 py-4 text-2xl font-bold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all placeholder:text-slate-300 dark:placeholder:text-slate-700"
-                aria-label="Enter amount to calculate GST"
-              />
-            </div>
-          </div>
+          <NumberInputField
+            label="Amount (₹)"
+            helperText="(Enter total amount)"
+            value={amount}
+            onChange={(val) => setAmount(val)}
+            placeholder="0.00"
+            aria-label="Enter amount to calculate GST"
+          />
 
           {/* GST Rates */}
           <div className="space-y-4">

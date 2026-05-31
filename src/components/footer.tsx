@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Calculator, Mail, ArrowRight, Hash } from 'lucide-react';
+import { Calculator, ArrowRight } from 'lucide-react';
 import { FaInstagram, FaLinkedin, FaThreads, FaEnvelope } from "react-icons/fa6";
 
 const footerLinks = {

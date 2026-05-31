@@ -1,6 +1,6 @@
 import React from 'react';
 import { Metadata } from 'next';
-import { Tag, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { Tag, CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
 import { Breadcrumbs } from '@/components/breadcrumbs';
 

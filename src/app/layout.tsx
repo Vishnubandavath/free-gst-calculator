@@ -30,7 +30,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: "Free GST Calculator India (2026) | Online GST Calculator - VSNEXOS",
+    default: "Free GST Calculator India | VSNEXOS",
     template: "%s | VSNEXOS",
   },
   description: "Calculate GST instantly with VSNEXOS Free GST Calculator. GST inclusive and exclusive calculations, GST formulas, GST slabs, GST examples, GST guide, and GST resources for India.",

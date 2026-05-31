@@ -11,9 +11,6 @@ import {
    Smartphone, 
    ArrowRight, 
    CheckCircle2, 
-   HelpCircle,
-   Plus,
-   Minus,
    ChevronDown
  } from 'lucide-react';
 import { GSTCalculator } from '@/components/gst-calculator';

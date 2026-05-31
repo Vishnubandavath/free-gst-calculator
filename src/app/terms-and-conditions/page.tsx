@@ -11,7 +11,7 @@ export default function TermsPage() {
   return (
     <LegalLayout title="Terms & Conditions" lastUpdated="May 30, 2026">
       <section className="space-y-6">
-        <p>Welcome to VSNEXOS! These terms and conditions outline the rules and regulations for the use of VSNEXOS's Website, located at free-gst-calculator.vsnexos.com.</p>
+        <p>Welcome to VSNEXOS! These terms and conditions outline the rules and regulations for the use of VSNEXOS&apos;s Website, located at free-gst-calculator.vsnexos.com.</p>
 
         <h2>1. Agreement to Terms</h2>
         <p>By accessing this website, we assume you accept these terms and conditions. Do not continue to use VSNEXOS if you do not agree to take all of the terms and conditions stated on this page.</p>
@@ -32,7 +32,7 @@ export default function TermsPage() {
         <p>The calculators provided on VSNEXOS are for informational purposes only. While we strive for 100% accuracy based on the latest GST rules in India, we do not guarantee that the results are error-free. Users should verify all calculations independently before using them for official tax filings or financial decisions.</p>
 
         <h2>5. User Responsibilities</h2>
-        <p>Users are responsible for ensuring that the data they input into the calculators is accurate. VSNEXOS is not responsible for any financial loss or legal issues arising from the use of incorrect data or reliance on the tool's output for official purposes.</p>
+        <p>Users are responsible for ensuring that the data they input into the calculators is accurate. VSNEXOS is not responsible for any financial loss or legal issues arising from the use of incorrect data or reliance on the tool&apos;s output for official purposes.</p>
 
         <h2>6. Limitation of Liability</h2>
         <p>In no event shall VSNEXOS, nor any of its officers, directors and employees, be held liable for anything arising out of or in any way connected with your use of this Website whether such liability is under contract. VSNEXOS, including its officers, directors and employees shall not be held liable for any indirect, consequential or special liability arising out of or in any way related to your use of this Website.</p>

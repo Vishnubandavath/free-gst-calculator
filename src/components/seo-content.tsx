@@ -9,10 +9,10 @@ export function SEOContent() {
           The Goods and Services Tax (GST) is a revolutionary indirect tax system implemented in India on July 1, 2017. It was designed to replace a complex web of multiple indirect taxes like Value Added Tax (VAT), Central Excise Duty, Service Tax, and Luxury Tax. GST is a comprehensive, multi-stage, destination-based tax that is levied on every value addition in the supply chain.
         </p>
         <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-          By adopting a "One Nation, One Tax" philosophy, GST has streamlined the taxation process, reduced the cascading effect of taxes (tax on tax), and improved the ease of doing business across state borders. It is divided into three main components: CGST (Central GST), SGST (State GST), and IGST (Integrated GST), which ensure that tax revenue is fairly distributed between the Central and State governments.
+          By adopting a &ldquo;One Nation, One Tax&rdquo; philosophy, GST has streamlined the taxation process, reduced the cascading effect of taxes (tax on tax), and improved the ease of doing business across state borders. It is divided into three main components: CGST (Central GST), SGST (State GST), and IGST (Integrated GST), which ensure that tax revenue is fairly distributed between the Central and State governments.
         </p>
         <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-          The implementation of GST marked a paradigm shift in the Indian economy. It replaced the previous regime where taxes were levied by both the Central and State governments independently, often leading to double taxation and a "cascading effect" where tax was calculated on the tax already paid at previous stages. Under GST, tax is levied only on the value addition at each stage, and manufacturers or service providers can claim 'Input Tax Credit' for the taxes paid on their purchases.
+          The implementation of GST marked a paradigm shift in the Indian economy. It replaced the previous regime where taxes were levied by both the Central and State governments independently, often leading to double taxation and a &ldquo;cascading effect&rdquo; where tax was calculated on the tax already paid at previous stages. Under GST, tax is levied only on the value addition at each stage, and manufacturers or service providers can claim &apos;Input Tax Credit&apos; for the taxes paid on their purchases.
         </p>
       </section>
 
@@ -24,11 +24,11 @@ export function SEOContent() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="p-8 glass-card rounded-3xl space-y-4">
             <h4 className="font-bold text-indigo-600">Step 1: Choose Calculation Type</h4>
-            <p className="text-slate-600 dark:text-slate-400">Select "GST Exclusive" if you want to add tax to a base price. Select "GST Inclusive" if you want to find out the base price from a total amount that already includes tax.</p>
+            <p className="text-slate-600 dark:text-slate-400">Select &ldquo;GST Exclusive&rdquo; if you want to add tax to a base price. Select &ldquo;GST Inclusive&rdquo; if you want to find out the base price from a total amount that already includes tax.</p>
           </div>
           <div className="p-8 glass-card rounded-3xl space-y-4">
             <h4 className="font-bold text-indigo-600">Step 2: Enter the Amount</h4>
-            <p className="text-slate-600 dark:text-slate-400">Type in the numerical value. Our calculator works in real-time, so you'll see the results update as you type.</p>
+            <p className="text-slate-600 dark:text-slate-400">Type in the numerical value. Our calculator works in real-time, so you&apos;ll see the results update as you type.</p>
           </div>
           <div className="p-8 glass-card rounded-3xl space-y-4">
             <h4 className="font-bold text-indigo-600">Step 3: Select GST Rate</h4>
@@ -44,10 +44,10 @@ export function SEOContent() {
       <section id="inclusive-formula" className="space-y-6">
         <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white">3. Understanding GST Inclusive Formula</h2>
         <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-          GST Inclusive amount refers to the total value of a product or service after adding the GST amount to the original value of the product. Many retail prices are "Inclusive of all taxes." If you need to "back-calculate" to find the original price before tax, you use the inclusive formula.
+          When a price is &ldquo;GST Inclusive,&rdquo; it means the Goods and Services Tax has already been added to the base cost of the product or service. Many retail prices are &ldquo;Inclusive of all taxes.&rdquo; If you need to &ldquo;back-calculate&rdquo; to find the original price before tax, you use the inclusive formula.
         </p>
         <div className="bg-slate-900 text-indigo-300 p-8 rounded-3xl font-mono text-lg shadow-2xl">
-          <p className="mb-2">// GST Inclusive Formula</p>
+          <p className="mb-2">{"// GST Inclusive Formula"}</p>
           <p>GST Amount = Total Amount - (Total Amount * (100 / (100 + GST Rate)))</p>
           <p>Net Price = Total Amount - GST Amount</p>
         </div>
@@ -59,10 +59,10 @@ export function SEOContent() {
       <section id="exclusive-formula" className="space-y-6">
         <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white">4. Understanding GST Exclusive Formula</h2>
         <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-          GST Exclusive amount refers to the value of a product or service before adding the GST. This is common in B2B transactions where prices are quoted "plus GST." To find the total amount you need to pay, you add the calculated GST to the base price.
+          GST Exclusive amount refers to the value of a product or service before adding the GST. This is common in B2B transactions where prices are quoted &ldquo;plus GST.&rdquo; To find the total amount you need to pay, you add the calculated GST to the base price.
         </p>
         <div className="bg-slate-900 text-cyan-300 p-8 rounded-3xl font-mono text-lg shadow-2xl">
-          <p className="mb-2">// GST Exclusive Formula</p>
+          <p className="mb-2">{"// GST Exclusive Formula"}</p>
           <p>GST Amount = (Base Price * GST Rate) / 100</p>
           <p>Total Amount = Base Price + GST Amount</p>
         </div>
@@ -143,7 +143,7 @@ export function SEOContent() {
           Registered businesses must issue GST-compliant invoices, maintain proper records of purchases and sales, and file regular returns (GSTR-1, GSTR-3B). Failure to comply can lead to penalties and loss of Input Tax Credit.
         </p>
         <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-          Business owners should also be aware of the 'Composition Scheme', which is designed for small taxpayers with a turnover of up to ₹1.5 crore. Under this scheme, businesses can pay a fixed percentage of their turnover as tax and file quarterly returns instead of monthly ones. This significantly reduces the compliance burden for small retailers and restaurants.
+          Business owners should also be aware of the &apos;Composition Scheme&apos;, which is designed for small taxpayers with a turnover of up to ₹1.5 crore. Under this scheme, businesses can pay a fixed percentage of their turnover as tax and file quarterly returns instead of monthly ones. This significantly reduces the compliance burden for small retailers and restaurants.
         </p>
       </section>
 
@@ -153,7 +153,7 @@ export function SEOContent() {
           Freelancers providing services like software development, design, or marketing often wonder if they need GST. If you provide services to clients within India and your turnover is above ₹20 lakhs, you must register.
         </p>
         <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-          For export of services (working for international clients), GST is technically 0% under the "Zero Rated Supply" rules, provided you have a Letter of Undertaking (LUT). However, registration is still required if you cross the threshold.
+          For export of services (working for international clients), GST is technically 0% under the &ldquo;Zero Rated Supply&rdquo; rules, provided you have a Letter of Undertaking (LUT). However, registration is still required if you cross the threshold.
         </p>
       </section>
 
@@ -227,7 +227,7 @@ export function SEOContent() {
       <section id="gst-penalties" className="space-y-6">
         <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white">14. GST Penalties and Late Fees</h2>
         <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-          Filing GST returns after the due date attracts a late fee. Currently, the late fee is ₹50 per day of delay (₹25 for CGST and ₹25 for SGST) for regular taxpayers, and ₹20 per day for 'Nil' return filers. The maximum late fee is usually capped at ₹5,000.
+          Filing GST returns after the due date attracts a late fee. Currently, the late fee is ₹50 per day of delay (₹25 for CGST and ₹25 for SGST) for regular taxpayers, and ₹20 per day for &apos;Nil&apos; return filers. The maximum late fee is usually capped at ₹5,000.
         </p>
         <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
           In addition to late fees, interest at 18% per annum is charged on the outstanding tax amount from the day following the due date.
@@ -267,14 +267,14 @@ export function SEOContent() {
           <li><strong>GSTR-9:</strong> Annual consolidated return for regular taxpayers.</li>
         </ul>
         <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-          Timely filing of these returns is essential to maintain a good 'GST Compliance Rating', which can affect a business's reputation and its ability to claim ITC.
+          Timely filing of these returns is essential to maintain a good &apos;GST Compliance Rating&apos;, which can affect a business&apos;s reputation and its ability to claim ITC.
         </p>
       </section>
 
       <section id="gst-conclusion" className="space-y-6">
         <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white">18. Conclusion: The Importance of Accurate GST Calculation</h2>
         <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-          In the modern Indian business landscape, GST compliance is not just a legal requirement but a strategic advantage. Accurate calculations ensure that you don't overpay taxes, avoid penalties, and maintain healthy cash flow through proper ITC management.
+          In the modern Indian business landscape, GST compliance is not just a legal requirement but a strategic advantage. Accurate calculations ensure that you don&apos;t overpay taxes, avoid penalties, and maintain healthy cash flow through proper ITC management.
         </p>
         <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
           The VSNEXOS GST Calculator is designed to be your reliable partner in this journey, providing you with the precision and speed you need to focus on what matters most—growing your business.
