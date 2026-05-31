@@ -129,7 +129,7 @@ export function CookieConsent() {
                 <div key={item.id} className="flex items-start justify-between gap-4">
                   <div className="space-y-1">
                     <p className="font-bold text-slate-900 dark:text-white">{item.title}</p>
-                    <p className="text-sm text-slate-500">{item.desc}</p>
+                    <p className="text-sm text-slate-500 dark:text-slate-400">{item.desc}</p>
                   </div>
                   <button
                     disabled={item.required}

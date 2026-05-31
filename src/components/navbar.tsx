@@ -4,8 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Calculator, BookOpen, HelpCircle, Info, Mail, Moon, Sun, Tag } from 'lucide-react';
-import { useTheme } from 'next-themes';
+import { Menu, X, Calculator, BookOpen, HelpCircle, Info, Mail, Tag } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const navLinks = [
@@ -20,8 +19,6 @@ export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     // Only add scroll listener in browser environment
@@ -34,10 +31,6 @@ export function Navbar() {
       handleScroll();
       return () => window.removeEventListener('scroll', handleScroll);
     }
-  }, []);
-
-  useEffect(() => {
-    setMounted(true);
   }, []);
 
   const toggleMenu = () => setIsOpen(!isOpen);
@@ -63,7 +56,7 @@ export function Navbar() {
               </span>
               <div className="relative mt-1">
                 <span className="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-[0.2em] leading-none block">
-                  VSNEXOS GST CALCULATOR
+                  GST CALCULATOR
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-shine pointer-events-none" />
               </div>
@@ -86,25 +79,10 @@ export function Navbar() {
                 {link.name}
               </Link>
             ))}
-            <div className="h-6 w-px bg-slate-200 dark:bg-slate-800 mx-2" />
-            <button
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="p-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-              aria-label="Toggle theme"
-            >
-              {mounted ? (theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />) : <span className="inline-block w-5 h-5" />}
-            </button>
           </div>
 
           {/* Mobile Navigation Toggle */}
           <div className="flex items-center gap-2 lg:hidden">
-            <button
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="p-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-              aria-label="Toggle theme"
-            >
-              {mounted ? (theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />) : <span className="inline-block w-5 h-5" />}
-            </button>
             <button
               onClick={toggleMenu}
               className="p-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"

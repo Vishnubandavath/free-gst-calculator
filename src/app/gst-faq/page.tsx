@@ -5,8 +5,8 @@ import { Breadcrumbs } from '@/components/breadcrumbs';
 import { homeFaqs } from '@/data/home-content';
 
 export const metadata: Metadata = {
-  title: 'GST FAQ India | 50+ Common GST Questions Answered',
-  description: 'Find answers to all your GST questions. Registration, filing, slabs, formulas, CGST/SGST, and more. The most comprehensive GST FAQ resource.',
+  title: 'GST FAQ India | Common GST Questions Answered - VSNEXOS',
+  description: 'Find answers to your GST questions. Learn about registration, filing, tax slabs, formulas, CGST/SGST splits, and more.',
 };
 
 export default function GSTFAQPage() {

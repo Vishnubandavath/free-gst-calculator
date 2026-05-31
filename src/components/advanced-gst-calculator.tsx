@@ -8,15 +8,15 @@ import { formatCurrency } from '@/lib/gst-logic';
 interface InvoiceItem {
   id: string;
   description: string;
-  quantity: number;
-  price: number;
+  quantity: number | string;
+  price: number | string;
   gstRate: number;
-  discount: number;
+  discount: number | string;
 }
 
 export function AdvancedGSTCalculator() {
   const [items, setItems] = useState<InvoiceItem[]>([
-    { id: crypto.randomUUID(), description: 'Item 1', quantity: 1, price: 0, gstRate: 18, discount: 0 }
+    { id: 'item-1', description: 'Item 1', quantity: 1, price: 0, gstRate: 18, discount: 0 }
   ]);
   const [mounted, setMounted] = useState(false);
 
@@ -47,15 +47,29 @@ export function AdvancedGSTCalculator() {
   const updateItem = (id: string, field: keyof InvoiceItem, value: string | number) => {
     setItems(items.map(item => {
       if (item.id === id) {
-        return { ...item, [field]: value };
+        let sanitizedValue = value;
+        if (field === 'quantity' || field === 'price' || field === 'discount') {
+          const parsed = typeof value === 'string' ? parseFloat(value) : value;
+          if (!isNaN(parsed) && parsed < 0) {
+            sanitizedValue = 0;
+          }
+          if (field === 'discount' && !isNaN(parsed) && parsed > 100) {
+            sanitizedValue = 100;
+          }
+        }
+        return { ...item, [field]: sanitizedValue };
       }
       return item;
     }));
   };
 
   const calculateLineTotal = (item: InvoiceItem) => {
-    const lineTotal = item.quantity * item.price;
-    const discountAmount = (lineTotal * item.discount) / 100;
+    const qty = Math.max(0, typeof item.quantity === 'string' ? parseFloat(item.quantity) || 0 : item.quantity);
+    const prc = Math.max(0, typeof item.price === 'string' ? parseFloat(item.price) || 0 : item.price);
+    const disc = Math.min(100, Math.max(0, typeof item.discount === 'string' ? parseFloat(item.discount) || 0 : item.discount));
+
+    const lineTotal = qty * prc;
+    const discountAmount = (lineTotal * disc) / 100;
     const taxableAmount = lineTotal - discountAmount;
     const gstAmount = (taxableAmount * item.gstRate) / 100;
     return {
@@ -178,16 +192,18 @@ export function AdvancedGSTCalculator() {
                     <td className="px-6 py-4">
                       <input
                         type="number"
+                        min="0"
                         value={item.quantity}
-                        onChange={(e) => updateItem(item.id, 'quantity', parseFloat(e.target.value) || 0)}
+                        onChange={(e) => updateItem(item.id, 'quantity', e.target.value)}
                         className="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-lg px-2 py-1 text-sm focus:ring-2 focus:ring-indigo-500/20"
                       />
                     </td>
                     <td className="px-6 py-4">
                       <input
                         type="number"
+                        min="0"
                         value={item.price}
-                        onChange={(e) => updateItem(item.id, 'price', parseFloat(e.target.value) || 0)}
+                        onChange={(e) => updateItem(item.id, 'price', e.target.value)}
                         className="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-lg px-2 py-1 text-sm focus:ring-2 focus:ring-indigo-500/20"
                       />
                     </td>
@@ -205,17 +221,17 @@ export function AdvancedGSTCalculator() {
                     <td className="px-6 py-4">
                       <input
                         type="number"
+                        min="0"
+                        max="100"
                         value={item.discount}
-                        onChange={(e) => updateItem(item.id, 'discount', parseFloat(e.target.value) || 0)}
+                        onChange={(e) => updateItem(item.id, 'discount', e.target.value)}
                         className="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-lg px-2 py-1 text-sm focus:ring-2 focus:ring-indigo-500/20"
                       />
                     </td>
                     <td className="px-6 py-4 text-right font-bold text-slate-900 dark:text-white">
                       {(() => {
-                        const lineTotal = item.quantity * item.price;
-                        const taxable = lineTotal - (lineTotal * item.discount) / 100;
-                        const gst = (taxable * item.gstRate) / 100;
-                        return formatCurrency(taxable + gst);
+                        const line = calculateLineTotal(item);
+                        return formatCurrency(line.total);
                       })()}
                     </td>
                     <td className="px-6 py-4">
@@ -327,7 +343,7 @@ export function AdvancedGSTCalculator() {
                 <tr key={item.id} className="text-sm">
                   <td className="py-4 font-medium">{item.description}</td>
                   <td className="py-4">{item.quantity}</td>
-                  <td className="py-4">{formatCurrency(item.price)}</td>
+                  <td className="py-4">{formatCurrency(typeof item.price === 'string' ? parseFloat(item.price) || 0 : item.price)}</td>
                   <td className="py-4">{item.gstRate}%</td>
                   <td className="py-4">{item.discount}%</td>
                   <td className="py-4 text-right font-bold">{formatCurrency(line.total)}</td>

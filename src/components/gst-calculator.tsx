@@ -7,9 +7,16 @@ import { calculateGST, formatCurrency, formatNumber } from '@/lib/gst-logic';
 import { cn } from '@/lib/utils';
 import confetti from 'canvas-confetti';
 import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+import html2canvas from 'html2canvas-pro';
 
 const GST_RATES = [0, 3, 5, 12, 18, 28];
+
+const generateReportId = () => {
+  const now = new Date();
+  const dateStr = now.toISOString().slice(0, 10).replace(/-/g, '');
+  const random = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+  return `GST-${dateStr}-${random}`;
+};
 
 export function GSTCalculator() {
   const [amount, setAmount] = useState<string>('');
@@ -18,20 +25,15 @@ export function GSTCalculator() {
   const [isInterState, setIsInterState] = useState(false);
   const [copied, setCopied] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [reportId, setReportId] = useState<string>('');
   const pdfRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setMounted(true);
+    setReportId(generateReportId());
   }, []);
 
   const result = calculateGST(parseFloat(amount) || 0, rate, type, isInterState);
-
-  const generateReportId = () => {
-    const now = new Date();
-    const dateStr = now.toISOString().slice(0, 10).replace(/-/g, '');
-    const random = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
-    return `GST-${dateStr}-${random}`;
-  };
 
   const handleDownloadPDF = async () => {
     if (!pdfRef.current) return;
@@ -342,7 +344,7 @@ Calculated via VSNEXOS GST Calculator`;
             <div className="flex justify-between items-end mt-8 pt-4">
               <div className="text-left">
                 <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Report ID</p>
-                <p className="text-sm font-bold text-slate-900">{generateReportId()}</p>
+                <p className="text-sm font-bold text-slate-900">{reportId}</p>
               </div>
               <div className="text-right">
                 <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Generated On</p>
