@@ -22,10 +22,7 @@ const poppins = Poppins({
 });
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#020617" },
-  ],
+  themeColor: "#020617",
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
@@ -77,11 +74,10 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/logo.svg", type: "image/svg+xml" },
     ],
     apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+      { url: "/logo.svg", sizes: "180x180", type: "image/svg+xml" },
     ],
   },
 };
@@ -110,55 +106,57 @@ export default function RootLayout({
         </Script>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify([
-            {
-              '@context': 'https://schema.org',
-              '@type': 'Organization',
-              name: 'VSNEXOS',
-              url: 'https://free-gst-calculator.vsnexos.com',
-              logo: 'https://free-gst-calculator.vsnexos.com/logo.svg',
-              sameAs: [
-                'https://www.instagram.com/vsnexos/',
-                'https://www.linkedin.com/in/vsnexos/',
-                'https://www.threads.com/@vsnexos'
-              ]
-            },
-            {
-              '@context': 'https://schema.org',
-              '@type': 'WebSite',
-              name: 'VSNEXOS GST Calculator',
-              url: 'https://free-gst-calculator.vsnexos.com',
-              potentialAction: {
-                '@type': 'SearchAction',
-                target: 'https://free-gst-calculator.vsnexos.com/?q={search_term_string}',
-                'query-input': 'required name=search_term_string'
-              }
-            },
-            {
-              '@context': 'https://schema.org',
-              '@type': 'SoftwareApplication',
-              name: 'VSNEXOS GST Calculator',
-              operatingSystem: 'Any',
-              applicationCategory: 'FinanceApplication',
-              offers: {
-                '@type': 'Offer',
-                price: '0',
-                priceCurrency: 'INR'
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify([
+              {
+                '@context': 'https://schema.org',
+                '@type': 'Organization',
+                name: 'VSNEXOS',
+                url: 'https://free-gst-calculator.vsnexos.com',
+                logo: 'https://free-gst-calculator.vsnexos.com/logo.svg',
+                sameAs: [
+                  'https://www.instagram.com/vsnexos/',
+                  'https://www.linkedin.com/in/vsnexos/',
+                  'https://www.threads.com/@vsnexos'
+                ]
               },
-              aggregateRating: {
-                '@type': 'AggregateRating',
-                ratingValue: '4.9',
-                reviewCount: '1250'
+              {
+                '@context': 'https://schema.org',
+                '@type': 'WebSite',
+                name: 'VSNEXOS GST Calculator',
+                url: 'https://free-gst-calculator.vsnexos.com',
+                potentialAction: {
+                  '@type': 'SearchAction',
+                  target: 'https://free-gst-calculator.vsnexos.com/?q={search_term_string}',
+                  'query-input': 'required name=search_term_string'
+                }
+              },
+              {
+                '@context': 'https://schema.org',
+                '@type': 'SoftwareApplication',
+                name: 'VSNEXOS GST Calculator',
+                operatingSystem: 'Any',
+                applicationCategory: 'FinanceApplication',
+                offers: {
+                  '@type': 'Offer',
+                  price: '0',
+                  priceCurrency: 'INR'
+                },
+                aggregateRating: {
+                  '@type': 'AggregateRating',
+                  ratingValue: '4.9',
+                  reviewCount: '1250'
+                }
               }
-            }
-          ]) }}
+            ])
+          }}
         />
       </head>
       <body className="min-h-screen bg-white dark:bg-slate-950 font-sans selection:bg-indigo-100 dark:selection:bg-indigo-900/30 selection:text-indigo-900 dark:selection:text-indigo-100">
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="dark"
+          forcedTheme="dark"
           disableTransitionOnChange
         >
           <div className="relative flex min-h-screen flex-col">

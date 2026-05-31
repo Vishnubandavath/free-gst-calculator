@@ -46,8 +46,8 @@ export const features = [
     icon: "Smartphone"
   },
   {
-    title: "Dark Mode Support",
-    description: "Easily switch between light and dark themes for comfortable viewing.",
+    title: "Vibrant Dark Theme",
+    description: "Designed with a premium dark mode, optimized for visual comfort and focus.",
     icon: "Moon"
   }
 ];

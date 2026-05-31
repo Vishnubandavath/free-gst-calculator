@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Script from 'next/script';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
    Calculator, 
@@ -53,11 +54,13 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col gap-20 pb-20">
-      <script
+      <Script
+        id="ld-json-webapp"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <script
+      <Script
+        id="ld-json-faq"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
       />

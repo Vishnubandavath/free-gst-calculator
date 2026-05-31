@@ -19,7 +19,7 @@ export default function CookiePolicyPage() {
       <h2>3. The Cookies We Set</h2>
       <ul>
         <li><strong>Site preferences cookies:</strong> In order to provide you with a great experience on this site we provide the functionality to set your preferences for how this site runs when you use it.</li>
-        <li><strong>Theme cookies:</strong> We use cookies to remember your preference for dark or light mode.</li>
+        <li><strong>Theme cookies:</strong> We use cookies to store basic configuration settings.</li>
       </ul>
 
       <h2>4. Third Party Cookies</h2>

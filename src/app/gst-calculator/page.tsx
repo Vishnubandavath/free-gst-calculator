@@ -81,7 +81,7 @@ export default function GSTCalculatorPage() {
                 'Downloadable PDF reports',
                 'Supports all Indian GST slabs',
                 'Mobile-first premium design',
-                'Dark and Light mode support',
+                'Vibrant premium dark theme',
                 'Inter-state (IGST) support',
                 '100% free and accurate'
               ].map((item, i) => (
