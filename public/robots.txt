@@ -1,0 +1,5 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://free-gst-calculator.vsnexos.com/sitemap.xml
+Host: free-gst-calculator.vsnexos.com
