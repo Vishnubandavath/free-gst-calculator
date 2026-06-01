@@ -1,291 +1,302 @@
 import React from 'react';
 
+const quickLinks = [
+  { label: 'What Is GST?', href: '#what-is-gst' },
+  { label: 'Calculator Guide', href: '#calculator-guide' },
+  { label: 'Inclusive Formula', href: '#inclusive-formula' },
+  { label: 'Exclusive Formula', href: '#exclusive-formula' },
+  { label: 'GST Slabs', href: '#gst-slabs' },
+  { label: 'Business Compliance', href: '#gst-for-businesses' },
+  { label: 'Invoices', href: '#gst-invoices' },
+  { label: 'ITC Rules', href: '#itc-rules' },
+];
+
+const stepCards = [
+  {
+    title: 'Choose the calculator mode',
+    text: 'Use GST Exclusive when you want to add tax on top of a base amount, and GST Inclusive when you want to extract the tax portion from a final billed amount.',
+  },
+  {
+    title: 'Enter the transaction amount',
+    text: 'Type the amount you want to evaluate. The calculator updates in real time, so you can quickly compare tax outcomes for different values.',
+  },
+  {
+    title: 'Pick the applicable GST slab',
+    text: 'Select 0%, 3%, 5%, 12%, 18%, or 28% based on the relevant Indian GST category for the product or service.',
+  },
+  {
+    title: 'Review and export the result',
+    text: 'Check the base amount, GST amount, and total payable amount, then copy, share, or export the calculation for business records.',
+  },
+];
+
+const slabRows = [
+  ['0% (Exempt)', 'Essential goods', 'Fresh vegetables, milk, eggs, books, salt'],
+  ['5%', 'Mass-use items', 'Tea, sugar, edible oil, packaged essentials'],
+  ['12%', 'Lower standard slab', 'Processed foods, computers, some electronics'],
+  ['18%', 'Main standard slab', 'Most services, industrial goods, business purchases'],
+  ['28%', 'Luxury and demerit goods', 'High-end consumer items, tobacco, some vehicles'],
+];
+
+const invoicePoints = [
+  'Supplier name, address, and GSTIN',
+  'A unique invoice number and issue date',
+  'Recipient name, address, and GSTIN when applicable',
+  'HSN code for goods or SAC code for services',
+  'Item description, taxable value, and tax rate',
+  'Separate CGST, SGST, or IGST breakdown',
+  'Total invoice value and authorized signature',
+];
+
+const returnTypes = [
+  { name: 'GSTR-1', detail: 'Used to report outward supplies or sales.' },
+  { name: 'GSTR-3B', detail: 'Summary return for tax liability and payment.' },
+  { name: 'GSTR-4', detail: 'Annual return for composition taxpayers.' },
+  { name: 'GSTR-9', detail: 'Annual return for regular registered taxpayers.' },
+];
+
 export function SEOContent() {
   return (
-    <div className="space-y-16">
-      <section id="what-is-gst" className="space-y-6">
-        <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white">1. What is GST (Goods and Services Tax)?</h2>
-        <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-          The Goods and Services Tax (GST) is a revolutionary indirect tax system implemented in India on July 1, 2017. It was designed to replace a complex web of multiple indirect taxes like Value Added Tax (VAT), Central Excise Duty, Service Tax, and Luxury Tax. GST is a comprehensive, multi-stage, destination-based tax that is levied on every value addition in the supply chain.
+    <div className="space-y-10 md:space-y-12">
+      <section className="rounded-[2rem] border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-950/40 p-6 md:p-8 lg:p-10 space-y-6">
+        <div className="space-y-3 max-w-5xl">
+          <p className="text-sm font-bold uppercase tracking-[0.2em] text-indigo-600 dark:text-indigo-400">
+            GST Resource Center
+          </p>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 dark:text-white">
+            GST Guide for calculations, slabs, invoices, and compliance
+          </h2>
+          <p className="text-base md:text-lg leading-relaxed text-slate-600 dark:text-slate-400">
+            This guide explains the practical side of GST in India, including how to use a GST calculator, how inclusive and exclusive tax formulas work, what the current slabs mean, and what businesses need for compliance and invoicing.
+          </p>
+        </div>
+
+        <div className="flex flex-wrap gap-3">
+          {quickLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="rounded-full border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:border-indigo-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section id="what-is-gst" className="space-y-5 max-w-6xl">
+        <h3 className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">
+          What is GST in India?
+        </h3>
+        <p className="text-lg leading-relaxed text-slate-600 dark:text-slate-400">
+          Goods and Services Tax is a destination-based indirect tax system introduced in India to replace multiple older taxes such as VAT, service tax, and excise duty. It simplifies taxation by applying a unified structure across the supply chain and allowing tax to be levied on value addition rather than repeatedly on the same base.
         </p>
-        <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-          By adopting a &ldquo;One Nation, One Tax&rdquo; philosophy, GST has streamlined the taxation process, reduced the cascading effect of taxes (tax on tax), and improved the ease of doing business across state borders. It is divided into three main components: CGST (Central GST), SGST (State GST), and IGST (Integrated GST), which ensure that tax revenue is fairly distributed between the Central and State governments.
-        </p>
-        <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-          The implementation of GST marked a paradigm shift in the Indian economy. It replaced the previous regime where taxes were levied by both the Central and State governments independently, often leading to double taxation and a &ldquo;cascading effect&rdquo; where tax was calculated on the tax already paid at previous stages. Under GST, tax is levied only on the value addition at each stage, and manufacturers or service providers can claim &apos;Input Tax Credit&apos; for the taxes paid on their purchases.
+        <p className="text-lg leading-relaxed text-slate-600 dark:text-slate-400">
+          GST is typically divided into CGST, SGST, and IGST depending on whether a transaction happens within a state or across states. This structure helps both businesses and consumers understand how tax is applied on products and services in a more transparent way.
         </p>
       </section>
 
       <section id="calculator-guide" className="space-y-6">
-        <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white">2. VSNEXOS GST Calculator Guide</h2>
-        <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-          Using the VSNEXOS GST Calculator is simple and intuitive. Whether you are a business owner calculating tax for an invoice or a consumer checking the tax on a purchase, our tool provides instant accuracy.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="p-8 glass-card rounded-3xl space-y-4">
-            <h4 className="font-bold text-indigo-600">Step 1: Choose Calculation Type</h4>
-            <p className="text-slate-600 dark:text-slate-400">Select &ldquo;GST Exclusive&rdquo; if you want to add tax to a base price. Select &ldquo;GST Inclusive&rdquo; if you want to find out the base price from a total amount that already includes tax.</p>
-          </div>
-          <div className="p-8 glass-card rounded-3xl space-y-4">
-            <h4 className="font-bold text-indigo-600">Step 2: Enter the Amount</h4>
-            <p className="text-slate-600 dark:text-slate-400">Type in the numerical value. Our calculator works in real-time, so you&apos;ll see the results update as you type.</p>
-          </div>
-          <div className="p-8 glass-card rounded-3xl space-y-4">
-            <h4 className="font-bold text-indigo-600">Step 3: Select GST Rate</h4>
-            <p className="text-slate-600 dark:text-slate-400">Choose from the standard Indian GST slabs: 0%, 3%, 5%, 12%, 18%, or 28%. The tool automatically calculates the CGST and SGST/UTGST split.</p>
-          </div>
-          <div className="p-8 glass-card rounded-3xl space-y-4">
-            <h4 className="font-bold text-indigo-600">Step 4: Download or Share</h4>
-            <p className="text-slate-600 dark:text-slate-400">Once you have your result, you can copy it to your clipboard, share it via social media, or download a professional PDF report for your records.</p>
-          </div>
+        <div className="max-w-5xl space-y-3">
+          <h3 className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">
+            How to use the GST calculator
+          </h3>
+          <p className="text-lg leading-relaxed text-slate-600 dark:text-slate-400">
+            The VSNEXOS GST Calculator is designed for quick day-to-day calculations, whether you are preparing an invoice, checking a supplier quote, or validating the tax portion in a total amount.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+          {stepCards.map((card, index) => (
+            <div
+              key={card.title}
+              className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-slate-50/80 dark:bg-slate-900/60 p-6 md:p-7 space-y-3"
+            >
+              <p className="text-sm font-bold uppercase tracking-[0.2em] text-indigo-600 dark:text-indigo-400">
+                Step {index + 1}
+              </p>
+              <h4 className="text-xl font-bold text-slate-900 dark:text-white">{card.title}</h4>
+              <p className="leading-relaxed text-slate-600 dark:text-slate-400">{card.text}</p>
+            </div>
+          ))}
         </div>
       </section>
 
-      <section id="inclusive-formula" className="space-y-6">
-        <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white">3. Understanding GST Inclusive Formula</h2>
-        <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-          When a price is &ldquo;GST Inclusive,&rdquo; it means the Goods and Services Tax has already been added to the base cost of the product or service. Many retail prices are &ldquo;Inclusive of all taxes.&rdquo; If you need to &ldquo;back-calculate&rdquo; to find the original price before tax, you use the inclusive formula.
-        </p>
-        <div className="bg-slate-900 text-indigo-300 p-8 rounded-3xl font-mono text-lg shadow-2xl">
-          <p className="mb-2">{"// GST Inclusive Formula"}</p>
-          <p>GST Amount = Total Amount - (Total Amount * (100 / (100 + GST Rate)))</p>
-          <p>Net Price = Total Amount - GST Amount</p>
+      <section className="grid grid-cols-1 xl:grid-cols-2 gap-6 md:gap-8">
+        <div id="inclusive-formula" className="space-y-5 rounded-[2rem] bg-slate-950 text-white p-6 md:p-8">
+          <div className="space-y-3">
+            <h3 className="text-2xl md:text-3xl font-black">GST inclusive formula</h3>
+            <p className="text-slate-300 leading-relaxed">
+              Use the inclusive formula when the final price already contains GST and you want to find the original base amount and tax portion separately.
+            </p>
+          </div>
+          <div className="rounded-3xl bg-white/5 border border-white/10 p-5 font-mono text-sm md:text-base text-indigo-300 space-y-2">
+            <p>GST Amount = Total Amount - (Total Amount × 100 / (100 + GST Rate))</p>
+            <p>Base Amount = Total Amount - GST Amount</p>
+          </div>
+          <p className="text-slate-300 leading-relaxed">
+            Example: if the total billed price is ₹1,180 inclusive of 18% GST, the base amount is ₹1,000 and the GST amount is ₹180.
+          </p>
         </div>
-        <p className="text-slate-600 dark:text-slate-400">
-          Example: If a product costs ₹1,180 (inclusive of 18% GST), the base price would be ₹1,000 and the GST amount would be ₹180.
-        </p>
-      </section>
 
-      <section id="exclusive-formula" className="space-y-6">
-        <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white">4. Understanding GST Exclusive Formula</h2>
-        <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-          GST Exclusive amount refers to the value of a product or service before adding the GST. This is common in B2B transactions where prices are quoted &ldquo;plus GST.&rdquo; To find the total amount you need to pay, you add the calculated GST to the base price.
-        </p>
-        <div className="bg-slate-900 text-cyan-300 p-8 rounded-3xl font-mono text-lg shadow-2xl">
-          <p className="mb-2">{"// GST Exclusive Formula"}</p>
-          <p>GST Amount = (Base Price * GST Rate) / 100</p>
-          <p>Total Amount = Base Price + GST Amount</p>
+        <div id="exclusive-formula" className="space-y-5 rounded-[2rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950/50 p-6 md:p-8">
+          <div className="space-y-3">
+            <h3 className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">
+              GST exclusive formula
+            </h3>
+            <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+              Use the exclusive formula when your amount is before tax and you want to calculate the GST amount and final payable value.
+            </p>
+          </div>
+          <div className="rounded-3xl bg-slate-900 text-cyan-300 p-5 font-mono text-sm md:text-base space-y-2">
+            <p>GST Amount = (Base Amount × GST Rate) / 100</p>
+            <p>Total Amount = Base Amount + GST Amount</p>
+          </div>
+          <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+            Example: if the base amount is ₹1,000 and GST is 18%, the tax is ₹180 and the total becomes ₹1,180.
+          </p>
         </div>
-        <p className="text-slate-600 dark:text-slate-400">
-          Example: If a service costs ₹1,000 (exclusive of 18% GST), you add ₹180 as tax, making the total payable ₹1,180.
-        </p>
       </section>
 
       <section id="gst-slabs" className="space-y-6">
-        <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white">5. Latest GST Slabs in India (2026)</h2>
-        <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-          The Indian government categorizes goods and services into different tax brackets to ensure social and economic balance. Essential items are taxed at lower rates, while luxury items attract higher taxes.
-        </p>
-        <div className="overflow-x-auto rounded-3xl border border-slate-200 dark:border-slate-800">
-          <table className="w-full text-left border-collapse">
+        <div className="max-w-5xl space-y-3">
+          <h3 className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">
+            Current GST slabs in India
+          </h3>
+          <p className="text-lg leading-relaxed text-slate-600 dark:text-slate-400">
+            Indian GST rates are grouped into different slabs based on the nature of the product or service. Essentials generally fall into lower slabs, while luxury and demerit goods attract higher tax rates.
+          </p>
+        </div>
+
+        <div className="overflow-x-auto rounded-[2rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950/40">
+          <table className="w-full min-w-[720px] text-left border-collapse">
             <thead>
-              <tr className="bg-slate-50 dark:bg-slate-900/50 text-slate-900 dark:text-white font-bold">
-                <th className="px-6 py-4">Slab</th>
-                <th className="px-6 py-4">Category</th>
-                <th className="px-6 py-4">Examples</th>
+              <tr className="bg-slate-50 dark:bg-slate-900/60 text-slate-900 dark:text-white">
+                <th className="px-6 py-4 text-sm font-bold uppercase tracking-wide">Slab</th>
+                <th className="px-6 py-4 text-sm font-bold uppercase tracking-wide">Category</th>
+                <th className="px-6 py-4 text-sm font-bold uppercase tracking-wide">Common examples</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
-              <tr>
-                <td className="px-6 py-4 font-bold text-indigo-600">0% (Exempt)</td>
-                <td className="px-6 py-4">Essential Items</td>
-                <td className="px-6 py-4">Fresh vegetables, milk, eggs, salt, books.</td>
-              </tr>
-              <tr>
-                <td className="px-6 py-4 font-bold text-indigo-600">5%</td>
-                <td className="px-6 py-4">Mass Consumption</td>
-                <td className="px-6 py-4">Sugar, spices, tea, edible oils, life-saving drugs.</td>
-              </tr>
-              <tr>
-                <td className="px-6 py-4 font-bold text-indigo-600">12%</td>
-                <td className="px-6 py-4">Standard Rate (Lower)</td>
-                <td className="px-6 py-4">Computers, processed food, mobile phones.</td>
-              </tr>
-              <tr>
-                <td className="px-6 py-4 font-bold text-indigo-600">18%</td>
-                <td className="px-6 py-4">Standard Rate (Higher)</td>
-                <td className="px-6 py-4">Industrial goods, capital goods, professional services.</td>
-              </tr>
-              <tr>
-                <td className="px-6 py-4 font-bold text-indigo-600">28%</td>
-                <td className="px-6 py-4">Luxury/Sin Goods</td>
-                <td className="px-6 py-4">Luxury cars, tobacco products, carbonated drinks.</td>
-              </tr>
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-slate-600 dark:text-slate-400">
+              {slabRows.map((row) => (
+                <tr key={row[0]}>
+                  <td className="px-6 py-4 font-bold text-indigo-600 dark:text-indigo-400">{row[0]}</td>
+                  <td className="px-6 py-4">{row[1]}</td>
+                  <td className="px-6 py-4">{row[2]}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
       </section>
 
-      <section id="benefits-of-gst" className="space-y-6">
-        <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white">6. Key Benefits of GST Implementation</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="space-y-3">
-            <h4 className="text-xl font-bold">Removal of Cascading Effect</h4>
-            <p className="text-slate-600 dark:text-slate-400">Before GST, taxes were applied on already taxed items. GST allows for Input Tax Credit (ITC), where businesses can offset tax paid on inputs against tax collected on sales.</p>
-          </div>
-          <div className="space-y-3">
-            <h4 className="text-xl font-bold">Simplified Compliance</h4>
-            <p className="text-slate-600 dark:text-slate-400">A single portal for registration, filing, and refunds has significantly reduced the paperwork and administrative burden for Indian businesses.</p>
-          </div>
-          <div className="space-y-3">
-            <h4 className="text-xl font-bold">Unified National Market</h4>
-            <p className="text-slate-600 dark:text-slate-400">The removal of check posts and entry taxes at state borders has improved logistics and made it easier for companies to operate across India.</p>
-          </div>
+      <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10">
+        <div id="gst-for-businesses" className="space-y-5">
+          <h3 className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">
+            GST compliance for businesses
+          </h3>
+          <p className="text-lg leading-relaxed text-slate-600 dark:text-slate-400">
+            Businesses crossing the applicable turnover threshold generally need GST registration, periodic return filing, tax payment, proper invoicing, and record keeping. Good GST compliance reduces risk, improves vendor confidence, and makes it easier to claim input tax credit.
+          </p>
+          <p className="text-lg leading-relaxed text-slate-600 dark:text-slate-400">
+            Even smaller businesses often monitor GST closely because registration can become necessary based on turnover, interstate transactions, or platform-based selling requirements.
+          </p>
         </div>
-      </section>
 
-      <section id="gst-for-businesses" className="space-y-6">
-        <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white">7. GST Compliance for Businesses</h2>
-        <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-          For any business in India, understanding GST registration is crucial. If your annual turnover exceeds ₹40 lakhs (for goods) or ₹20 lakhs (for services), registration is mandatory. Some states in the North East have lower thresholds of ₹10 lakhs.
-        </p>
-        <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-          Registered businesses must issue GST-compliant invoices, maintain proper records of purchases and sales, and file regular returns (GSTR-1, GSTR-3B). Failure to comply can lead to penalties and loss of Input Tax Credit.
-        </p>
-        <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-          Business owners should also be aware of the &apos;Composition Scheme&apos;, which is designed for small taxpayers with a turnover of up to ₹1.5 crore. Under this scheme, businesses can pay a fixed percentage of their turnover as tax and file quarterly returns instead of monthly ones. This significantly reduces the compliance burden for small retailers and restaurants.
-        </p>
-      </section>
-
-      <section id="gst-for-freelancers" className="space-y-6">
-        <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white">8. GST Guide for Freelancers and Consultants</h2>
-        <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-          Freelancers providing services like software development, design, or marketing often wonder if they need GST. If you provide services to clients within India and your turnover is above ₹20 lakhs, you must register.
-        </p>
-        <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-          For export of services (working for international clients), GST is technically 0% under the &ldquo;Zero Rated Supply&rdquo; rules, provided you have a Letter of Undertaking (LUT). However, registration is still required if you cross the threshold.
-        </p>
+        <div id="gst-for-freelancers" className="space-y-5">
+          <h3 className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">
+            GST for freelancers and consultants
+          </h3>
+          <p className="text-lg leading-relaxed text-slate-600 dark:text-slate-400">
+            Freelancers, agencies, and consultants often need GST calculations for service billing, retainers, digital work, and interstate client engagements. Knowing whether a quote is inclusive or exclusive helps prevent undercharging or issuing incorrect invoices.
+          </p>
+          <p className="text-lg leading-relaxed text-slate-600 dark:text-slate-400">
+            If your turnover or business activity triggers registration requirements, GST-compliant invoicing becomes an important part of professional operations.
+          </p>
+        </div>
       </section>
 
       <section id="gst-invoices" className="space-y-6">
-        <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white">9. Essential Components of a GST Invoice</h2>
-        <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-          A valid GST invoice must contain specific details to be legally recognized. These include:
-        </p>
-        <ul className="list-disc pl-6 space-y-2 text-slate-600 dark:text-slate-400">
-          <li>Name, address, and GSTIN of the supplier.</li>
-          <li>A unique consecutive serial number for the financial year.</li>
-          <li>Date of issue.</li>
-          <li>Name, address, and GSTIN of the recipient (if registered).</li>
-          <li>HSN code for goods or SAC code for services.</li>
-          <li>Description of goods or services.</li>
-          <li>Total value and taxable value.</li>
-          <li>Tax rate (CGST, SGST, or IGST).</li>
-          <li>Signature of the authorized supplier.</li>
-        </ul>
-      </section>
+        <div className="max-w-5xl space-y-3">
+          <h3 className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">
+            Essential elements of a GST invoice
+          </h3>
+          <p className="text-lg leading-relaxed text-slate-600 dark:text-slate-400">
+            A proper GST invoice needs more than just an amount and tax rate. The right information supports return filing, buyer verification, and accurate bookkeeping.
+          </p>
+        </div>
 
-      <section id="faq-extended" className="space-y-8">
-        <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white">10. Frequently Asked Questions (FAQ)</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="space-y-4">
-            <h4 className="text-xl font-bold">Is GST mandatory for small shops?</h4>
-            <p className="text-slate-600 dark:text-slate-400">Only if the annual turnover exceeds the threshold (usually ₹40 lakhs for goods). Smaller shops can opt for the Composition Scheme for easier compliance.</p>
-          </div>
-          <div className="space-y-4">
-            <h4 className="text-xl font-bold">What is the difference between CGST and SGST?</h4>
-            <p className="text-slate-600 dark:text-slate-400">CGST is the Central portion of the tax, while SGST is the State portion. For a 12% GST rate, 6% goes to the Center and 6% goes to the State.</p>
-          </div>
-          <div className="space-y-4">
-            <h4 className="text-xl font-bold">How often should I file GST returns?</h4>
-            <p className="text-slate-600 dark:text-slate-400">Most businesses file monthly returns (GSTR-3B). Smaller businesses under the QRMP scheme can file quarterly but pay tax monthly.</p>
-          </div>
-          <div className="space-y-4">
-            <h4 className="text-xl font-bold">Can I calculate GST for international prices?</h4>
-            <p className="text-slate-600 dark:text-slate-400">Yes, the mathematical formula remains the same regardless of currency. Just enter the amount and the applicable tax rate for your region.</p>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+          {invoicePoints.map((point) => (
+            <div
+              key={point}
+              className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 px-5 py-4 text-slate-700 dark:text-slate-300"
+            >
+              {point}
+            </div>
+          ))}
         </div>
       </section>
-      
-      <section id="hsn-sac-codes" className="space-y-6">
-        <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white">11. HSN and SAC Codes Explained</h2>
-        <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-          HSN (Harmonized System of Nomenclature) is an international classification system for goods. In India, it is used to identify the GST rate applicable to different products. Similarly, SAC (Services Accounting Code) is used for classifying services.
-        </p>
-        <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-          Using the correct HSN or SAC code is essential for accurate invoicing and return filing. Businesses with a turnover of more than ₹5 crore must use 6-digit HSN codes, while those with less than ₹5 crore can use 4-digit codes for B2B invoices.
-        </p>
+
+      <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10">
+        <div id="hsn-sac-codes" className="space-y-5">
+          <h3 className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">
+            HSN and SAC codes explained
+          </h3>
+          <p className="text-lg leading-relaxed text-slate-600 dark:text-slate-400">
+            HSN codes classify goods and SAC codes classify services under GST. Using the right code helps identify the applicable GST rate, improves invoice accuracy, and reduces mismatches during compliance and reporting.
+          </p>
+          <p className="text-lg leading-relaxed text-slate-600 dark:text-slate-400">
+            As businesses grow, correct code usage becomes even more important for B2B billing, audits, and return reconciliation.
+          </p>
+        </div>
+
+        <div id="itc-rules" className="space-y-5">
+          <h3 className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">
+            Input Tax Credit rules and eligibility
+          </h3>
+          <p className="text-lg leading-relaxed text-slate-600 dark:text-slate-400">
+            Input Tax Credit allows businesses to offset GST paid on purchases against GST collected on sales. To claim ITC properly, the invoice must be valid, goods or services must be received, and the purchase must be tied to business use.
+          </p>
+          <p className="text-lg leading-relaxed text-slate-600 dark:text-slate-400">
+            ITC is one of the biggest reasons accurate GST calculation and invoice structuring matter in routine financial workflows.
+          </p>
+        </div>
       </section>
 
-      <section id="gst-for-startups" className="space-y-6">
-        <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white">12. GST for Startups and New Businesses</h2>
-        <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-          For startups, getting GST registration early can be beneficial even if the turnover is below the threshold. It allows the business to claim Input Tax Credit on capital goods, office rentals, and professional services, which can significantly reduce the initial burn rate.
-        </p>
-        <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-          Moreover, many B2B clients prefer working with GST-registered vendors as it allows them to claim ITC on their purchases. Being GST-compliant also builds trust and professional credibility in the market.
-        </p>
-      </section>
+      <section className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-8 md:gap-10">
+        <div id="gstr-returns" className="space-y-5">
+          <h3 className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">
+            Common GST returns businesses should know
+          </h3>
+          <div className="space-y-4">
+            {returnTypes.map((item) => (
+              <div
+                key={item.name}
+                className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950/40 px-5 py-4"
+              >
+                <p className="text-lg font-bold text-slate-900 dark:text-white">{item.name}</p>
+                <p className="mt-1 text-slate-600 dark:text-slate-400">{item.detail}</p>
+              </div>
+            ))}
+          </div>
+        </div>
 
-      <section id="gst-ecommerce" className="space-y-6">
-        <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white">13. GST Rules for E-commerce Sellers</h2>
-        <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-          If you are selling products through platforms like Amazon, Flipkart, or your own Shopify store, GST registration is mandatory regardless of your turnover. E-commerce operators are also required to collect TCS (Tax Collected at Source) at the rate of 1% on the net value of taxable supplies made through them.
-        </p>
+        <div id="gst-conclusion" className="rounded-[2rem] bg-gradient-to-br from-indigo-600 to-cyan-600 p-6 md:p-8 text-white space-y-4">
+          <p className="text-sm font-bold uppercase tracking-[0.2em] text-indigo-100">
+            Why It Matters
+          </p>
+          <h3 className="text-2xl md:text-3xl font-black">
+            Accurate GST calculation supports better business decisions
+          </h3>
+          <p className="text-indigo-100 leading-relaxed">
+            Whether you are pricing products, issuing invoices, checking supplier tax, or planning compliance, accurate GST calculations reduce manual errors and improve confidence.
+          </p>
+          <p className="text-indigo-100 leading-relaxed">
+            The VSNEXOS GST Calculator is built to make that process faster, clearer, and easier for businesses, freelancers, and individual users across India.
+          </p>
+        </div>
       </section>
-
-      <section id="gst-penalties" className="space-y-6">
-        <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white">14. GST Penalties and Late Fees</h2>
-        <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-          Filing GST returns after the due date attracts a late fee. Currently, the late fee is ₹50 per day of delay (₹25 for CGST and ₹25 for SGST) for regular taxpayers, and ₹20 per day for &apos;Nil&apos; return filers. The maximum late fee is usually capped at ₹5,000.
-        </p>
-        <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-          In addition to late fees, interest at 18% per annum is charged on the outstanding tax amount from the day following the due date.
-        </p>
-      </section>
-
-      <section id="itc-rules" className="space-y-6">
-        <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white">15. Input Tax Credit (ITC) Rules and Eligibility</h2>
-        <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-          Input Tax Credit is the backbone of the GST system. It allows a taxpayer to reduce the tax they have already paid on inputs from the tax they have collected on their output. However, to claim ITC, certain conditions must be met:
-        </p>
-        <ul className="list-disc pl-6 space-y-2 text-slate-600 dark:text-slate-400">
-          <li>The taxpayer must possess a valid tax invoice or debit note.</li>
-          <li>The goods or services must have been actually received.</li>
-          <li>The supplier must have paid the tax to the government.</li>
-          <li>The taxpayer must have filed their GST returns.</li>
-          <li>The input must be used for business purposes only.</li>
-        </ul>
-      </section>
-
-      <section id="gst-audit" className="space-y-6">
-        <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white">16. GST Audit Requirements</h2>
-        <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-          Previously, businesses with a turnover exceeding ₹2 crore were required to undergo a GST audit by a CA or CMA. However, the government has now replaced this with a self-certification requirement. Businesses with a turnover of more than ₹5 crore must file a self-certified reconciliation statement in Form GSTR-9C.
-        </p>
-      </section>
-
-      <section id="gstr-returns" className="space-y-6">
-        <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white">17. Different Types of GST Returns</h2>
-        <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-          GST returns are the primary way businesses report their sales, purchases, and tax liability to the government. There are several types of returns, but the most common ones are:
-        </p>
-        <ul className="list-disc pl-6 space-y-2 text-slate-600 dark:text-slate-400 text-lg">
-          <li><strong>GSTR-1:</strong> Used to report details of outward supplies (sales). Filed monthly or quarterly.</li>
-          <li><strong>GSTR-3B:</strong> A self-declaration summary return for reporting tax liability and paying tax. Filed monthly.</li>
-          <li><strong>GSTR-4:</strong> Annual return for taxpayers registered under the Composition Scheme.</li>
-          <li><strong>GSTR-9:</strong> Annual consolidated return for regular taxpayers.</li>
-        </ul>
-        <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-          Timely filing of these returns is essential to maintain a good &apos;GST Compliance Rating&apos;, which can affect a business&apos;s reputation and its ability to claim ITC.
-        </p>
-      </section>
-
-      <section id="gst-conclusion" className="space-y-6">
-        <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white">18. Conclusion: The Importance of Accurate GST Calculation</h2>
-        <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-          In the modern Indian business landscape, GST compliance is not just a legal requirement but a strategic advantage. Accurate calculations ensure that you don&apos;t overpay taxes, avoid penalties, and maintain healthy cash flow through proper ITC management.
-        </p>
-        <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-          The VSNEXOS GST Calculator is designed to be your reliable partner in this journey, providing you with the precision and speed you need to focus on what matters most—growing your business.
-        </p>
-      </section>
-
-      <div className="p-8 bg-indigo-50 dark:bg-indigo-900/20 rounded-[2.5rem] border border-indigo-100 dark:border-indigo-800 text-center">
-        <p className="text-slate-500 dark:text-slate-400 text-sm">
-          This comprehensive GST guide was professionally written for VSNEXOS to provide accurate financial information. We update our content regularly to reflect the latest changes in Indian tax laws.
-        </p>
-      </div>
     </div>
   );
 }

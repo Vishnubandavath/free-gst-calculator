@@ -50,7 +50,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className="flex flex-col gap-20 pb-20">
+    <div className="flex flex-col gap-8 md:gap-10 lg:gap-12 pb-8 md:pb-10">
       <Script
         id="ld-json-webapp"
         type="application/ld+json"
@@ -62,11 +62,11 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
       />
       {/* Hero Section */}
-      <section className="relative overflow-hidden pt-12 md:pt-20 pb-32 hero-gradient">
+      <section className="relative overflow-hidden pt-8 md:pt-12 lg:pt-14 pb-10 md:pb-12 lg:pb-14 hero-gradient">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-indigo-500/10 blur-[120px] rounded-full -z-10" />
         
         <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-4xl mx-auto text-center space-y-8 mb-16">
+          <div className="max-w-4xl mx-auto text-center space-y-5 md:space-y-6 mb-6 md:mb-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -101,7 +101,7 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="flex flex-wrap justify-center gap-4 pt-4"
+              className="flex flex-wrap justify-center gap-3 md:gap-4 pt-2 md:pt-4"
             >
               <Link href="/gst-calculator" className="btn-primary flex items-center gap-2 group">
                 Start Calculating
@@ -113,7 +113,7 @@ export default function HomePage() {
             </motion.div>
           </div>
 
-          {/* Main Calculator Card */}
+          {/* Main Calculator Card *
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -121,13 +121,13 @@ export default function HomePage() {
             className="max-w-6xl mx-auto"
           >
             <GSTCalculator />
-          </motion.div>
+          </motion.div>*/}
         </div>
       </section>
 
       {/* Trust Indicators / Stats */}
       <section className="container mx-auto px-4 md:px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 p-8 md:p-12 glass-card rounded-[2rem] border-slate-200/50 dark:border-slate-800/50">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 p-5 md:p-7 glass-card rounded-[2rem] border-slate-200/50 dark:border-slate-800/50">
           {[
             { label: 'Calculations', value: '1M+' },
             { label: 'Accuracy', value: '100%' },
@@ -143,8 +143,8 @@ export default function HomePage() {
       </section>
 
       {/* Features Section */}
-      <section className="container mx-auto px-4 md:px-6 py-10">
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+      <section className="container mx-auto px-4 md:px-6 py-2 md:py-4">
+        <div className="text-center max-w-3xl mx-auto mb-6 md:mb-8 space-y-3">
           <h2 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
             Why choose VSNEXOS?
           </h2>
@@ -153,12 +153,12 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
           {features.map((feature, i) => (
             <motion.div
               key={i}
               whileHover={{ y: -5 }}
-              className="p-8 rounded-3xl glass-card border-slate-200/50 dark:border-slate-800/50 space-y-6"
+              className="p-5 md:p-6 rounded-3xl glass-card border-slate-200/50 dark:border-slate-800/50 space-y-4 md:space-y-5"
             >
               <div className="w-14 h-14 bg-indigo-50 dark:bg-indigo-950/50 rounded-2xl flex items-center justify-center text-indigo-600 dark:text-indigo-400">
                 {feature.icon === 'Zap' && <Zap size={28} />}
@@ -178,10 +178,10 @@ export default function HomePage() {
       </section>
 
       {/* GST Slabs Section */}
-      <section className="bg-slate-900 dark:bg-slate-950 py-24 text-white">
+      <section className="bg-slate-900 dark:bg-slate-950 py-10 md:py-12 lg:py-14 text-white">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 lg:gap-12 items-center">
+            <div className="space-y-5 md:space-y-6">
               <h2 className="text-3xl md:text-5xl font-black tracking-tight leading-tight">
                 Understand Indian <br />
                 <span className="text-indigo-400">GST Slabs 2026</span>
@@ -189,7 +189,7 @@ export default function HomePage() {
               <p className="text-slate-400 text-lg leading-relaxed">
                 India follows a multi-tiered tax structure to ensure fair taxation across different categories of goods and services.
               </p>
-              <ul className="space-y-4">
+              <ul className="space-y-3 md:space-y-4">
                 {[
                   '0% - Essential items like food grains, milk, etc.',
                   '5% - Common use items like sugar, spices, tea.',
@@ -207,9 +207,9 @@ export default function HomePage() {
                 Learn more in our GST Guide <ArrowRight size={20} />
               </Link>
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-3">
               {[0, 5, 12, 18, 28, 3].map((rate) => (
-                <div key={rate} className="p-8 bg-white/5 border border-white/10 rounded-3xl text-center group hover:bg-white/10 transition-all">
+                <div key={rate} className="p-5 md:p-6 bg-white/5 border border-white/10 rounded-3xl text-center group hover:bg-white/10 transition-all">
                   <p className="text-4xl font-black mb-2 text-indigo-400 group-hover:scale-110 transition-transform">{rate}%</p>
                   <p className="text-sm font-bold text-slate-400 uppercase tracking-widest">GST Rate</p>
                 </div>
@@ -219,10 +219,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* FAQ Section */}
+      {/* FAQ Section 
       <section className="container mx-auto px-4 md:px-6">
-        <div className="max-w-4xl mx-auto space-y-12">
-          <div className="text-center space-y-4">
+        <div className="max-w-4xl mx-auto space-y-6 md:space-y-8">
+          <div className="text-center space-y-3">
             <h2 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
               Frequently Asked Questions
             </h2>
@@ -231,7 +231,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-3 md:space-y-4">
             {homeFaqs.map((faq, i) => (
               <div 
                 key={i} 
@@ -244,7 +244,7 @@ export default function HomePage() {
               >
                 <button
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className="w-full flex items-center justify-between p-6 text-left"
+                  className="w-full flex items-center justify-between p-5 md:p-6 text-left"
                 >
                   <span className="text-lg font-bold text-slate-900 dark:text-white">{faq.question}</span>
                   <div className={cn(
@@ -262,7 +262,7 @@ export default function HomePage() {
                       exit={{ height: 0, opacity: 0 }}
                       className="overflow-hidden"
                     >
-                      <div className="p-6 pt-0 text-slate-600 dark:text-slate-400 leading-relaxed">
+                      <div className="p-5 md:p-6 pt-0 text-slate-600 dark:text-slate-400 leading-relaxed">
                         {faq.answer}
                       </div>
                     </motion.div>
@@ -272,35 +272,35 @@ export default function HomePage() {
             ))}
           </div>
           
-          <div className="text-center pt-4">
+          <div className="text-center pt-2">
             <Link href="/gst-faq" className="inline-flex items-center gap-2 font-bold text-indigo-600 hover:underline">
               View all 40+ FAQs <ArrowRight size={18} />
             </Link>
           </div>
         </div>
-      </section>
+      </section>*/}
 
       {/* GST Resource Center - AdSense friendly high-quality content */}
-      <section id="gst-resources" className="container mx-auto px-4 md:px-6 py-12">
-        <div className="max-w-5xl mx-auto">
+      <section id="gst-resources" className="container mx-auto px-4 md:px-6 py-4 md:py-6">
+        <div className="max-w-7xl mx-auto">
           <SEOContent />
         </div>
       </section>
 
       {/* CTA Section */}
       <section className="container mx-auto px-4 md:px-6">
-        <div className="bg-gradient-to-br from-indigo-600 to-cyan-600 rounded-[3rem] p-12 md:p-20 text-center text-white relative overflow-hidden">
+        <div className="bg-gradient-to-br from-indigo-600 to-cyan-600 rounded-[2.5rem] md:rounded-[3rem] p-6 md:p-8 lg:p-10 text-center text-white relative overflow-hidden">
           <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 blur-[100px] rounded-full -mr-48 -mt-48" />
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-cyan-400/20 blur-[100px] rounded-full -ml-48 -mb-48" />
           
-          <div className="relative z-10 space-y-8 max-w-3xl mx-auto">
+          <div className="relative z-10 space-y-5 md:space-y-6 max-w-3xl mx-auto">
             <h2 className="text-4xl md:text-6xl font-black tracking-tight leading-tight">
               Ready to simplify your <br /> GST calculations?
             </h2>
             <p className="text-indigo-100 text-lg md:text-xl">
               Join thousands of businesses who trust VSNEXOS for their daily tax calculations. Fast, free, and always accurate.
             </p>
-            <div className="flex flex-wrap justify-center gap-4 pt-4">
+            <div className="flex flex-wrap justify-center gap-3 md:gap-4 pt-2 md:pt-4">
               <Link href="/gst-calculator" className="bg-white text-indigo-600 px-8 py-4 rounded-2xl font-black text-lg hover:bg-indigo-50 transition-all shadow-xl active:scale-95">
                 Use Calculator Now
               </Link>
