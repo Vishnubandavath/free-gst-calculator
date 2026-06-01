@@ -615,4 +615,5 @@ By understanding eligibility requirements, preparing proper documentation, compl
 
 Before issuing invoices, calculating taxes, or filing returns, use our GST Calculator to estimate GST amounts accurately, determine tax-inclusive pricing, and simplify your GST compliance workflow.
 
-<div data-widget="mini-calculator"></
+<div data-widget="mini-calculator"></div>
+

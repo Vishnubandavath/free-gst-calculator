@@ -306,8 +306,8 @@ export function AdvancedGSTCalculator() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-3 items-end">
-                    {!isComposition ? (
+                  <div className="grid grid-cols-2 gap-3">
+                    {!isComposition && (
                       <div className="space-y-1">
                         <label className="text-xs font-semibold text-slate-500">GST %</label>
                         <select
@@ -320,40 +320,26 @@ export function AdvancedGSTCalculator() {
                           ))}
                         </select>
                       </div>
-                    ) : (
-                      <div className="space-y-1">
-                        <label className="text-xs font-semibold text-slate-500">Discount %</label>
-                        <input
-                          type="number"
-                          min="0"
-                          max="100"
-                          value={item.discount}
-                          onChange={(e) => updateItem(item.id, 'discount', e.target.value)}
-                          className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-sm focus:ring-1 focus:ring-indigo-500"
-                        />
-                      </div>
                     )}
-
-                    {!isComposition ? (
-                      <div className="space-y-1">
-                        <label className="text-xs font-semibold text-slate-500">Discount %</label>
-                        <input
-                          type="number"
-                          min="0"
-                          max="100"
-                          value={item.discount}
-                          onChange={(e) => updateItem(item.id, 'discount', e.target.value)}
-                          className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-sm focus:ring-1 focus:ring-indigo-500"
-                        />
-                      </div>
-                    ) : null}
-
-                    <div className="text-right pb-2 col-span-1">
-                      <span className="text-xs font-semibold text-slate-500 block mb-1">Total</span>
-                      <span className="text-base font-bold text-slate-900 dark:text-white">
-                        {formatCurrency(line.total)}
-                      </span>
+                    
+                    <div className="space-y-1">
+                      <label className="text-xs font-semibold text-slate-500">Discount %</label>
+                      <input
+                        type="number"
+                        min="0"
+                        max="100"
+                        value={item.discount}
+                        onChange={(e) => updateItem(item.id, 'discount', e.target.value)}
+                        className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-sm focus:ring-1 focus:ring-indigo-500"
+                      />
                     </div>
+                  </div>
+
+                  <div className="pt-2 flex justify-between items-end border-t border-slate-200/50 dark:border-slate-800/50">
+                    <span className="text-xs font-semibold text-slate-500">Total</span>
+                    <span className="text-lg font-bold text-indigo-600 dark:text-indigo-400">
+                      {formatCurrency(line.total)}
+                    </span>
                   </div>
                 </motion.div>
               );

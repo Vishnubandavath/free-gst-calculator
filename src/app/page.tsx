@@ -80,7 +80,7 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight text-slate-900 dark:text-white"
+              className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black tracking-tight text-slate-900 dark:text-white"
             >
               Calculate GST with <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-cyan-500">
@@ -145,7 +145,7 @@ export default function HomePage() {
       {/* Features Section */}
       <section className="container mx-auto px-4 md:px-6 py-2 md:py-4">
         <div className="text-center max-w-3xl mx-auto mb-6 md:mb-8 space-y-3">
-          <h2 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
             Why choose VSNEXOS?
           </h2>
           <p className="text-slate-600 dark:text-slate-400 text-lg">
@@ -182,7 +182,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 lg:gap-12 items-center">
             <div className="space-y-5 md:space-y-6">
-              <h2 className="text-3xl md:text-5xl font-black tracking-tight leading-tight">
+              <h2 className="text-2xl sm:text-3xl md:text-5xl font-black tracking-tight leading-tight">
                 Understand Indian <br />
                 <span className="text-indigo-400">GST Slabs 2026</span>
               </h2>
@@ -294,7 +294,7 @@ export default function HomePage() {
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-cyan-400/20 blur-[100px] rounded-full -ml-48 -mb-48" />
           
           <div className="relative z-10 space-y-5 md:space-y-6 max-w-3xl mx-auto">
-            <h2 className="text-4xl md:text-6xl font-black tracking-tight leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black tracking-tight leading-tight">
               Ready to simplify your <br /> GST calculations?
             </h2>
             <p className="text-indigo-100 text-lg md:text-xl">

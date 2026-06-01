@@ -166,7 +166,7 @@ export function InvoiceGeneratorForm() {
     <div className="space-y-8">
       {/* Editor Panel (Hidden on print) */}
       <form onSubmit={handleSubmit(onSubmit)} className="no-print space-y-8">
-        <div className="glass-card rounded-[2.5rem] p-6 md:p-10 border-slate-200/50 dark:border-slate-800/50 space-y-8">
+        <div className="glass-card rounded-[2.5rem] p-4 sm:p-6 md:p-10 border-slate-200/50 dark:border-slate-800/50 space-y-8">
           <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-6">
             <h3 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
               <FileText className="text-indigo-600" size={24} />
@@ -361,7 +361,7 @@ export function InvoiceGeneratorForm() {
                 );
 
                 return (
-                  <div key={field.id} className="p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/30 dark:bg-slate-900/10 space-y-4">
+                  <div key={field.id} className="p-4 sm:p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/30 dark:bg-slate-900/10 space-y-4">
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-bold text-indigo-600">Item #{index + 1}</span>
                       <button
