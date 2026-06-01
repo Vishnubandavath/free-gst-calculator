@@ -59,3 +59,36 @@ export function getPostBySlug(slug: string): BlogPost | null {
   const allPosts = getAllPosts();
   return allPosts.find((post) => post.slug === slug) || null;
 }
+
+export const POSTS_PER_PAGE = 12;
+
+export interface PaginationInfo {
+  currentPage: number;
+  totalPages: number;
+  totalPosts: number;
+  hasNextPage: boolean;
+  hasPrevPage: boolean;
+  posts: BlogPost[];
+}
+
+export function getPaginatedPosts(pageNumber: number = 1): PaginationInfo {
+  const allPosts = getAllPosts();
+  const totalPosts = allPosts.length;
+  const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
+  
+  // Ensure page is within valid range
+  const validPage = Math.max(1, Math.min(pageNumber, totalPages || 1));
+  
+  const startIdx = (validPage - 1) * POSTS_PER_PAGE;
+  const endIdx = startIdx + POSTS_PER_PAGE;
+  const posts = allPosts.slice(startIdx, endIdx);
+
+  return {
+    currentPage: validPage,
+    totalPages,
+    totalPosts,
+    hasNextPage: validPage < totalPages,
+    hasPrevPage: validPage > 1,
+    posts,
+  };
+}

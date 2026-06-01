@@ -127,10 +127,10 @@ Calculated via VSNEXOS GST Calculator`;
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start lg:items-stretch">
       {/* Input Panel */}
-      <div className="lg:col-span-7 space-y-6">
-        <div className="glass-card rounded-3xl p-6 md:p-8 space-y-8">
+      <div className="lg:col-span-7 flex">
+        <div className="glass-card rounded-3xl p-6 md:p-8 space-y-8 flex h-full w-full flex-col">
           {/* Calculation Type Toggle */}
           <div className="flex p-1 bg-slate-100 dark:bg-slate-800 rounded-2xl">
             <button
@@ -230,9 +230,9 @@ Calculated via VSNEXOS GST Calculator`;
       </div>
 
       {/* Result Panel */}
-      <div className="lg:col-span-5">
-        <div className="bg-indigo-600 rounded-3xl p-6 md:p-8 text-white shadow-2xl shadow-indigo-500/40 sticky top-24">
-          <div className="flex items-center justify-between mb-8">
+      <div className="lg:col-span-5 flex">
+        <div className="bg-indigo-600 rounded-3xl p-6 md:p-8 text-white shadow-2xl shadow-indigo-500/40 sticky top-24 flex h-full w-full flex-col">
+          <div className="flex items-center justify-between mb-6">
             <h3 className="text-lg font-bold flex items-center gap-2 opacity-90">
               <Calculator size={20} />
               Calculation Summary
@@ -242,53 +242,69 @@ Calculated via VSNEXOS GST Calculator`;
             </div>
           </div>
 
-          <div className="space-y-6">
-            <div className="pb-6 border-b border-white/10">
-              <p className="text-indigo-100 text-sm font-medium mb-1">
-                {type === 'exclusive' ? 'Net Amount (Exclusive)' : 'Net Amount (Base)'}
-              </p>
-              <h2 className="text-3xl font-bold tracking-tight">
-                {formatCurrency(result.netAmount)}
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <div className="p-4 bg-white/5 rounded-2xl border border-white/10">
-                <p className="text-indigo-100 text-xs font-medium mb-1">
-                  {isInterState ? 'IGST' : 'CGST'} ({isInterState ? rate : rate / 2}%)
-                </p>
-                <p className="text-xl font-bold">
-                  {formatCurrency(isInterState ? result.igst : result.cgst)}
-                </p>
-              </div>
-              <div className="p-4 bg-white/5 rounded-2xl border border-white/10">
-                <p className="text-indigo-100 text-xs font-medium mb-1">
-                  {isInterState ? 'UTGST' : 'SGST'} ({isInterState ? '0' : rate / 2}%)
-                </p>
-                <p className="text-xl font-bold">
-                  {formatCurrency(isInterState ? 0 : result.sgst)}
-                </p>
-              </div>
-            </div>
-
-            <div className="p-4 bg-white/10 rounded-2xl border border-white/20">
-              <div className="flex items-center justify-between mb-1">
-                <p className="text-indigo-100 text-sm font-medium">Total GST Amount</p>
+          <div className="flex h-full flex-col gap-5">
+            <div className="rounded-3xl bg-white/10 border border-white/20 p-5">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-indigo-100 text-xs font-bold uppercase tracking-[0.2em] mb-2">
+                    Total Amount
+                  </p>
+                  <h2 className="text-4xl font-black tracking-tight text-white">
+                    {formatCurrency(result.totalAmount)}
+                  </h2>
+                </div>
                 <p className="bg-emerald-400 text-indigo-950 text-[10px] font-bold px-2 py-0.5 rounded-full">
                   +{rate}%
                 </p>
               </div>
-              <p className="text-2xl font-bold">{formatCurrency(result.gstAmount)}</p>
             </div>
 
-            <div className="pt-6 border-t border-white/10">
-              <p className="text-indigo-100 text-sm font-medium mb-1">Total Amount (Inclusive)</p>
-              <h2 className="text-4xl font-black tracking-tight text-white">
-                {formatCurrency(result.totalAmount)}
-              </h2>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="p-4 bg-white/5 rounded-2xl border border-white/10">
+                <p className="text-indigo-100 text-xs font-medium mb-1">
+                  {type === 'exclusive' ? 'Net Amount' : 'Base Amount'}
+                </p>
+                <p className="text-xl font-bold">
+                  {formatCurrency(result.netAmount)}
+                </p>
+              </div>
+              <div className="p-4 bg-white/5 rounded-2xl border border-white/10">
+                <p className="text-indigo-100 text-xs font-medium mb-1">Total GST</p>
+                <p className="text-xl font-bold">
+                  {formatCurrency(result.gstAmount)}
+                </p>
+              </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-3 pt-4">
+            <div className="rounded-3xl bg-white/5 border border-white/10 p-5">
+              <div className="flex items-center justify-between mb-4">
+                <p className="text-sm font-semibold text-white">Tax Breakdown</p>
+                <p className="text-xs text-indigo-100">
+                  {isInterState ? 'Inter-State' : 'Intra-State'}
+                </p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div className="rounded-2xl bg-white/5 p-4 border border-white/10">
+                  <p className="text-indigo-100 text-xs font-medium mb-1">
+                    {isInterState ? 'IGST' : 'CGST'} ({isInterState ? rate : rate / 2}%)
+                  </p>
+                  <p className="text-lg font-bold">
+                    {formatCurrency(isInterState ? result.igst : result.cgst)}
+                  </p>
+                </div>
+                <div className="rounded-2xl bg-white/5 p-4 border border-white/10">
+                  <p className="text-indigo-100 text-xs font-medium mb-1">
+                    {isInterState ? 'UTGST' : 'SGST'} ({isInterState ? '0' : rate / 2}%)
+                  </p>
+                  <p className="text-lg font-bold">
+                    {formatCurrency(isInterState ? 0 : result.sgst)}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-auto grid grid-cols-2 gap-3 pt-2">
               <button
                 onClick={handleDownloadPDF}
                 className="flex items-center justify-center gap-2 py-3 bg-white/10 hover:bg-white/20 rounded-xl font-bold transition-all"

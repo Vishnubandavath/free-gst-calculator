@@ -1,12 +1,14 @@
 import { Metadata } from 'next';
 
 type Props = {
-  params: { platform: string };
+  params: Promise<{ platform?: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const platform = params.platform;
-  const capitalizedPlatform = platform.charAt(0).toUpperCase() + platform.slice(1);
+  const { platform } = await params;
+  const capitalizedPlatform = platform
+    ? platform.charAt(0).toUpperCase() + platform.slice(1)
+    : 'VSNEXOS';
   
   return {
     title: `Redirecting to ${capitalizedPlatform} | VSNEXOS`,

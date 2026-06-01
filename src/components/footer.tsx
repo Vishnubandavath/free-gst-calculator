@@ -7,7 +7,6 @@ import { FaInstagram, FaLinkedin, FaThreads, FaEnvelope } from "react-icons/fa6"
 
 const footerLinks = {
   product: [
-    { name: 'Home', href: '/' },
     { name: 'GST Calculator', href: '/gst-calculator' },
     { name: 'Advanced GST', href: '/advanced-gst-calculator' },
     { name: 'GST Guide', href: '/gst-guide' },
@@ -20,9 +19,8 @@ const footerLinks = {
   ],
   support: [
     { name: 'FAQ', href: '/gst-faq' },
-    { name: 'About', href: '/about' },
+    { name: 'GST Guide', href: '/gst-guide' },
     { name: 'Contact', href: '/contact' },
-    { name: 'Indexing Status', href: '/indexing-status' },
   ],
   legal: [
     { name: 'Privacy Policy', href: '/privacy-policy' },
@@ -55,7 +53,7 @@ export function Footer() {
                   VSNEXOS
                 </span>
                 <span className="text-[9px] font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest mt-1 leading-none">
-                  VSNEXOS GST CALCULATOR
+                  GST CALCULATOR
                 </span>
               </div>
             </Link>
@@ -63,16 +61,16 @@ export function Footer() {
               India’s most professional and free GST calculator. Helping businesses and individuals calculate GST with precision and ease.
             </p>
             <div className="flex gap-4">
-              <Link href="/redirect/instagram" target="_blank" rel="noopener noreferrer" aria-label="Follow VSNEXOS on Instagram" className="w-10 h-10 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-600 transition-transform transform hover:-translate-y-0.5">
+              <Link href="/redirect/instagram" target="https://www.instagram.com/vsnexos/" rel="noopener noreferrer" aria-label="Follow VSNEXOS on Instagram" className="w-10 h-10 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-600 transition-transform transform hover:-translate-y-0.5">
                 <FaInstagram size={18} />
               </Link>
-              <Link href="/redirect/threads" target="_blank" rel="noopener noreferrer" aria-label="Follow VSNEXOS on Threads" className="w-10 h-10 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-600 transition-transform transform hover:-translate-y-0.5">
+              <Link href="/redirect/threads" target="https://www.threads.com/@vsnexos" rel="noopener noreferrer" aria-label="Follow VSNEXOS on Threads" className="w-10 h-10 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-600 transition-transform transform hover:-translate-y-0.5">
                 <FaThreads size={18} />
               </Link>
-              <Link href="/redirect/linkedin" target="_blank" rel="noopener noreferrer" aria-label="Connect with VSNEXOS on LinkedIn" className="w-10 h-10 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-600 transition-transform transform hover:-translate-y-0.5">
+              <Link href="/redirect/linkedin" target="https://www.linkedin.com/in/vsnexos/" rel="noopener noreferrer" aria-label="Connect with VSNEXOS on LinkedIn" className="w-10 h-10 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-600 transition-transform transform hover:-translate-y-0.5">
                 <FaLinkedin size={18} />
               </Link>
-              <Link href="/redirect/email" target="_blank" rel="noopener noreferrer" aria-label="Email VSNEXOS" className="w-10 h-10 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-600 transition-transform transform hover:-translate-y-0.5">
+              <Link href="/redirect/email" target="mailto:business@vsnexos.com" rel="noopener noreferrer" aria-label="Email VSNEXOS" className="w-10 h-10 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-600 transition-transform transform hover:-translate-y-0.5">
                 <FaEnvelope size={18} />
               </Link>
             </div>
@@ -80,7 +78,7 @@ export function Footer() {
 
           {/* Links Sections */}
           <div>
-            <h4 className="font-semibold text-slate-900 dark:text-white mb-6">Product</h4>
+            <h4 className="font-semibold text-slate-900 dark:text-white mb-6">Products</h4>
             <ul className="flex flex-col gap-4">
               {footerLinks.product.map((link) => (
                 <li key={link.href}>
