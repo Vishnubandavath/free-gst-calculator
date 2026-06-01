@@ -223,7 +223,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           {/* Sidebar CTA & Ad Slots */}
           <aside className="lg:col-span-4 space-y-8 lg:sticky lg:top-24 h-fit">
             {/* Widget 1: Interactive Tool CTA */}
-            <div className="glass-card rounded-[2rem] p-6 border-slate-200/60 dark:border-slate-800/60 space-y-6">
+            <div className="glass-card rounded-4xl p-6 border-slate-200/60 dark:border-slate-800/60 space-y-6">
               <h4 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
                 <Calculator size={18} className="text-indigo-600" />
                 Useful Tools
@@ -250,12 +250,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </div>
 
             {/* Widget 2: AdSense/CTAs Placeholder */}
-            <div className="bg-slate-50/50 dark:bg-slate-900/40 rounded-[2rem] p-8 border border-dashed border-slate-200 dark:border-slate-800 text-center space-y-4">
+            <div className="bg-slate-50/50 dark:bg-slate-900/40 rounded-4xl p-8 border border-dashed border-slate-200 dark:border-slate-800 text-center space-y-4">
               <div className="w-12 h-12 bg-indigo-500/10 rounded-2xl flex items-center justify-center mx-auto text-indigo-600">
                 <BookOpen size={22} />
               </div>
               <p className="text-xs font-bold text-slate-700 dark:text-slate-300">Advertisement / CTA Slot</p>
-              <p className="text-[10px] text-slate-400 max-w-[200px] mx-auto leading-relaxed">
+              <p className="text-[10px] text-slate-400 max-w-50 mx-auto leading-relaxed">
                 Ready for Google AdSense placements or localized product recommendations.
               </p>
             </div>
@@ -269,7 +269,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             {relatedPosts.map((rPost) => (
               <div
                 key={rPost.slug}
-                className="glass-card rounded-[2rem] p-6 border-slate-200/50 dark:border-slate-800/50 hover:border-indigo-500/20 transition-all flex flex-col justify-between group"
+                className="glass-card rounded-4xl p-6 border-slate-200/50 dark:border-slate-800/50 hover:border-indigo-500/20 transition-all flex flex-col justify-between group"
               >
                 <div className="space-y-4">
                   <span className="text-[10px] font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">

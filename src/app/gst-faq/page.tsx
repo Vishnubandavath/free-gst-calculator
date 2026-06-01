@@ -43,39 +43,6 @@ export default function GSTFAQPage() {
               </div>
             </div>
           ))}
-          
-          {/* Additional FAQs for content depth */}
-          {[
-            {
-              q: "Can I revise a GST return once filed?",
-              a: "Unlike Income Tax returns, GST returns (like GSTR-3B) cannot be revised. Any errors or omissions must be corrected in the return of the subsequent month/period."
-            },
-            {
-              q: "What is the penalty for not registering for GST?",
-              a: "If a business is required to register but fails to do so, a penalty of 10% of the tax amount due or ₹10,000, whichever is higher, can be imposed. For deliberate tax evasion, the penalty can be as high as 100% of the tax due."
-            },
-            {
-              q: "Is GST applicable on export of goods?",
-              a: "Exports are considered 'Zero Rated Supplies.' You can either export under a Letter of Undertaking (LUT) without paying IGST, or pay IGST and claim a refund later."
-            },
-            {
-              q: "What is HSN code?",
-              a: "HSN stands for Harmonized System of Nomenclature. it is an international 6-digit code system for classifying goods. India uses it to determine the GST rate for different products."
-            }
-          ].map((faq, index) => (
-            <div key={`extra-${index}`} className="glass-card rounded-3xl p-8 space-y-4">
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white flex items-start gap-4">
-                <span className="text-indigo-600">Q.</span>
-                {faq.q}
-              </h3>
-              <div className="flex items-start gap-4">
-                <span className="text-emerald-600 font-bold">A.</span>
-                <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-                  {faq.a}
-                </p>
-              </div>
-            </div>
-          ))}
         </div>
 
         <section className="bg-slate-50 dark:bg-slate-900 p-8 md:p-12 rounded-[2.5rem] border border-slate-200 dark:border-slate-800 text-center space-y-6">
@@ -85,6 +52,25 @@ export default function GSTFAQPage() {
           </p>
         </section>
       </div>
+
+      {/* FAQ Schema for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: homeFaqs.map((f) => ({
+              '@type': 'Question',
+              name: f.question,
+              acceptedAnswer: {
+                '@type': 'Answer',
+                text: f.answer,
+              },
+            })),
+          }),
+        }}
+      />
     </div>
   );
 }

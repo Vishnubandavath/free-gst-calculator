@@ -1,6 +1,13 @@
 import { getAllPosts } from '@/lib/blog';
 
-function generateSiteMap(staticEntries: any[], blogEntries: any[]) {
+type SitemapEntry = {
+  url: string;
+  lastModified: Date;
+  changeFrequency: 'daily' | 'monthly';
+  priority: number;
+};
+
+function generateSiteMap(staticEntries: SitemapEntry[], blogEntries: SitemapEntry[]) {
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   ${staticEntries
@@ -56,17 +63,17 @@ export async function GET() {
     '/gst-registration-guide',
     '/gst-invoice-examples',
     '/blog',
-  ];
+  ] as const;
 
-  const staticEntries = staticRoutes.map((route) => ({
+  const staticEntries: SitemapEntry[] = staticRoutes.map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified,
     changeFrequency: route === '' ? 'daily' : 'monthly',
     priority: route === '' ? 1 : 0.8,
-  }));
+  })) as SitemapEntry[];
 
   const blogPosts = getAllPosts();
-  const blogEntries = blogPosts.map((post) => {
+  const blogEntries: SitemapEntry[] = blogPosts.map((post) => {
     let lastMod = new Date();
     const rawDate = post.updatedAt || post.publishedAt;
     if (rawDate) {
@@ -80,7 +87,7 @@ export async function GET() {
       lastModified: lastMod,
       changeFrequency: 'monthly',
       priority: 0.7,
-    };
+    } as SitemapEntry;
   });
 
   const body = generateSiteMap(staticEntries, blogEntries);
@@ -88,7 +95,7 @@ export async function GET() {
   return new Response(body, {
     status: 200,
     headers: {
-      'Content-Type': 'application/xml',
+      'Content-Type': 'application/xml; charset=utf-8',
       'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate',
     },
   });
