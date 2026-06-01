@@ -43,6 +43,7 @@ export function InvoiceGeneratorForm() {
     control,
     handleSubmit,
     watch,
+    getValues,
     reset,
     formState: { errors },
   } = useForm<InvoiceFormData>({
@@ -140,7 +141,7 @@ export function InvoiceGeneratorForm() {
 
       pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
       
-      const invoiceNum = watch('invoiceNumber') || 'draft';
+      const invoiceNum = getValues('invoiceNumber') || 'draft';
       pdf.save(`invoice-${invoiceNum}.pdf`);
 
       confetti({

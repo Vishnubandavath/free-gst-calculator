@@ -36,7 +36,7 @@ export function getAllPosts(): BlogPost[] {
       const contentHtml = marked.parse(content) as string;
 
       return {
-        slug,
+        slug: data.slug || slug,
         title: data.title || '',
         description: data.description || '',
         publishedAt: data.publishedAt || '',
@@ -56,26 +56,6 @@ export function getAllPosts(): BlogPost[] {
 }
 
 export function getPostBySlug(slug: string): BlogPost | null {
-  const fullPath = path.join(postsDirectory, `${slug}.md`);
-  if (!fs.existsSync(fullPath)) {
-    return null;
-  }
-
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
-  const { data, content } = matter(fileContents);
-  const contentHtml = marked.parse(content) as string;
-
-  return {
-    slug,
-    title: data.title || '',
-    description: data.description || '',
-    publishedAt: data.publishedAt || '',
-    updatedAt: data.updatedAt || undefined,
-    author: data.author || '',
-    category: data.category || 'Guides',
-    tags: data.tags || [],
-    featuredImage: data.featuredImage || undefined,
-    draft: data.draft || false,
-    contentHtml,
-  } as BlogPost;
+  const allPosts = getAllPosts();
+  return allPosts.find((post) => post.slug === slug) || null;
 }

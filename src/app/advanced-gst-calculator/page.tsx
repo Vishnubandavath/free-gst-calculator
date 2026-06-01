@@ -9,9 +9,27 @@ export const metadata: Metadata = {
 };
 
 export default function AdvancedGSTCalculatorPage() {
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Advanced GST Calculator",
+    "operatingSystem": "Any",
+    "applicationCategory": "BusinessApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "INR"
+    }
+  };
+
   return (
-    <div className="container mx-auto px-4 md:px-6 py-12 space-y-20">
-      {/* Header */}
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+      />
+      <div className="container mx-auto px-4 md:px-6 py-12 space-y-20">
+        {/* Header */}
       <div className="max-w-4xl mx-auto text-center space-y-4">
         <h1 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
           Advanced <span className="text-indigo-600">GST Calculator</span>
@@ -91,5 +109,6 @@ export default function AdvancedGSTCalculatorPage() {
         </div>
       </section>
     </div>
+    </>
   );
 }

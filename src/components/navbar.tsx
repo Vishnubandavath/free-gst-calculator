@@ -13,7 +13,6 @@ const navLinks = [
   { name: 'Invoice Generator', href: '/invoice-generator', icon: FileText },
   { name: 'GST Guide', href: '/gst-guide', icon: BookOpen },
   { name: 'Blog', href: '/blog', icon: BookOpen },
-  { name: 'GST Slabs', href: '/gst-slabs-india', icon: Tag },
   { name: 'FAQ', href: '/gst-faq', icon: HelpCircle },
 ];
 

@@ -9,24 +9,43 @@ export const metadata: Metadata = {
 };
 
 export default function InvoiceGeneratorPage() {
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "GST Invoice Generator",
+    "operatingSystem": "Any",
+    "applicationCategory": "BusinessApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "INR"
+    }
+  };
+
   return (
-    <div className="container mx-auto px-4 md:px-6 py-12 space-y-8">
-      <div className="max-w-5xl mx-auto">
-        <Breadcrumbs />
-      </div>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+      />
+      <div className="container mx-auto px-4 md:px-6 py-12 space-y-8">
+        <div className="max-w-5xl mx-auto">
+          <Breadcrumbs />
+        </div>
 
-      <div className="max-w-4xl mx-auto text-center space-y-4">
-        <h1 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
-          Professional <span className="text-indigo-600">GST Invoice Generator</span>
-        </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400">
-          Generate, print, and export GST-compliant business invoices instantly.
-        </p>
-      </div>
+        <div className="max-w-4xl mx-auto text-center space-y-4">
+          <h1 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
+            Professional <span className="text-indigo-600">GST Invoice Generator</span>
+          </h1>
+          <p className="text-lg text-slate-600 dark:text-slate-400">
+            Generate, print, and export GST-compliant business invoices instantly.
+          </p>
+        </div>
 
-      <section className="max-w-5xl mx-auto">
-        <InvoiceGeneratorForm />
-      </section>
-    </div>
+        <section className="max-w-5xl mx-auto">
+          <InvoiceGeneratorForm />
+        </section>
+      </div>
+    </>
   );
 }
