@@ -249,7 +249,106 @@ export function AdvancedGSTCalculator() {
           </div>
         </div>
 
-        <div className="overflow-x-auto">
+        {/* Mobile Card Layout */}
+        <div className="space-y-4 md:hidden p-4 border-t border-slate-200 dark:border-slate-800">
+          <AnimatePresence initial={false}>
+            {items.map((item, index: number) => {
+              const line = calculateLineTotal(item);
+              return (
+                <motion.div
+                  key={item.id}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  className="p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/30 dark:bg-slate-900/10 space-y-4"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold text-indigo-600">Item #{index + 1}</span>
+                    <button
+                      onClick={() => removeItem(item.id)}
+                      disabled={items.length === 1}
+                      className="p-1 text-slate-400 hover:text-red-500 disabled:opacity-30 disabled:pointer-events-none transition-colors"
+                    >
+                      <Trash2 size={16} />
+                    </button>
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-xs font-semibold text-slate-500">Description</label>
+                    <input
+                      type="text"
+                      value={item.description}
+                      onChange={(e) => updateItem(item.id, 'description', e.target.value)}
+                      className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-sm font-medium focus:ring-1 focus:ring-indigo-500"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="space-y-1">
+                      <label className="text-xs font-semibold text-slate-500">Qty</label>
+                      <input
+                        type="number"
+                        min="0"
+                        value={item.quantity}
+                        onChange={(e) => updateItem(item.id, 'quantity', e.target.value)}
+                        className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-sm focus:ring-1 focus:ring-indigo-500"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label className="text-xs font-semibold text-slate-500">Price (₹)</label>
+                      <input
+                        type="number"
+                        min="0"
+                        value={item.price}
+                        onChange={(e) => updateItem(item.id, 'price', e.target.value)}
+                        className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-sm focus:ring-1 focus:ring-indigo-500"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    {!isComposition && (
+                      <div className="space-y-1">
+                        <label className="text-xs font-semibold text-slate-500">GST %</label>
+                        <select
+                          value={item.gstRate}
+                          onChange={(e) => updateItem(item.id, 'gstRate', parseInt(e.target.value))}
+                          className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-sm focus:ring-1"
+                        >
+                          {GST_RATES.map((r) => (
+                            <option key={r} value={r}>{r}%</option>
+                          ))}
+                        </select>
+                      </div>
+                    )}
+                    
+                    <div className="space-y-1">
+                      <label className="text-xs font-semibold text-slate-500">Discount %</label>
+                      <input
+                        type="number"
+                        min="0"
+                        max="100"
+                        value={item.discount}
+                        onChange={(e) => updateItem(item.id, 'discount', e.target.value)}
+                        className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-sm focus:ring-1 focus:ring-indigo-500"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="pt-2 flex justify-between items-end border-t border-slate-200/50 dark:border-slate-800/50">
+                    <span className="text-xs font-semibold text-slate-500">Total</span>
+                    <span className="text-lg font-bold text-indigo-600 dark:text-indigo-400">
+                      {formatCurrency(line.total)}
+                    </span>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
+        </div>
+
+        {/* Desktop Table Layout */}
+        <div className="hidden md:block overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="bg-slate-50/50 dark:bg-slate-900/50 text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">

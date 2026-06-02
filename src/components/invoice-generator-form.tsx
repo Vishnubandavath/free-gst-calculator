@@ -166,7 +166,7 @@ export function InvoiceGeneratorForm() {
     <div className="space-y-8">
       {/* Editor Panel (Hidden on print) */}
       <form onSubmit={handleSubmit(onSubmit)} className="no-print space-y-8">
-        <div className="glass-card rounded-[2.5rem] p-6 md:p-10 border-slate-200/50 dark:border-slate-800/50 space-y-8">
+        <div className="glass-card rounded-[2.5rem] p-4 sm:p-6 md:p-10 border-slate-200/50 dark:border-slate-800/50 space-y-8">
           <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-6">
             <h3 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
               <FileText className="text-indigo-600" size={24} />
@@ -351,7 +351,91 @@ export function InvoiceGeneratorForm() {
               </button>
             </div>
 
-            <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800">
+            {/* Mobile Card Layout */}
+            <div className="space-y-4 md:hidden">
+              {fields.map((field, index: number) => {
+                const item = (watchItems && watchItems[index]) || { quantity: 1, price: 0, gstRate: 18 };
+                const line = calculateLineItem(
+                  { quantity: Number(item.quantity) || 0, price: Number(item.price) || 0, gstRate: Number(item.gstRate) || 0 },
+                  watchIsInterState
+                );
+
+                return (
+                  <div key={field.id} className="p-4 sm:p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/30 dark:bg-slate-900/10 space-y-4">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold text-indigo-600">Item #{index + 1}</span>
+                      <button
+                        type="button"
+                        disabled={fields.length === 1}
+                        onClick={() => remove(index)}
+                        className="p-1 text-slate-400 hover:text-red-500 disabled:opacity-30 disabled:pointer-events-none transition-colors"
+                      >
+                        <Trash2 size={16} />
+                      </button>
+                    </div>
+
+                    <div className="space-y-1">
+                      <label className="text-xs font-semibold text-slate-500">Description*</label>
+                      <input
+                        type="text"
+                        placeholder="Software Consultation"
+                        {...register(`items.${index}.name` as const, { required: 'Required' })}
+                        className={cn(
+                          "w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-sm font-medium focus:ring-1 focus:ring-indigo-500",
+                          errors.items?.[index]?.name && "border-red-500 placeholder-red-400 text-red-500"
+                        )}
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3">
+                      <div className="space-y-1">
+                        <label className="text-xs font-semibold text-slate-500">Qty*</label>
+                        <input
+                          type="number"
+                          step="any"
+                          min="0.001"
+                          {...register(`items.${index}.quantity` as const, { required: true, min: 0.001 })}
+                          className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-sm focus:ring-1 focus:ring-indigo-500"
+                        />
+                      </div>
+                      <div className="space-y-1">
+                        <label className="text-xs font-semibold text-slate-500">Price (₹)*</label>
+                        <input
+                          type="number"
+                          step="any"
+                          min="0.01"
+                          {...register(`items.${index}.price` as const, { required: true, min: 0.01 })}
+                          className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-sm focus:ring-1 focus:ring-indigo-500"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3 items-end">
+                      <div className="space-y-1">
+                        <label className="text-xs font-semibold text-slate-500">GST %</label>
+                        <select
+                          {...register(`items.${index}.gstRate` as const, { valueAsNumber: true })}
+                          className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-sm focus:ring-1"
+                        >
+                          {GST_RATES.map((r) => (
+                            <option key={r} value={r}>{r}%</option>
+                          ))}
+                        </select>
+                      </div>
+                      <div className="text-right pb-2">
+                        <span className="text-xs font-semibold text-slate-500 block mb-1">Total</span>
+                        <span className="text-base font-bold text-slate-900 dark:text-white">
+                          {formatCurrency(line.total)}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Desktop Table Layout */}
+            <div className="hidden md:block overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800">
               <table className="w-full text-left border-collapse">
                 <thead>
                   <tr className="bg-slate-100 dark:bg-slate-900 text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">

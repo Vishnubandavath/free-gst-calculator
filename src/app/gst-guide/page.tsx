@@ -116,31 +116,33 @@ export default function GSTGuidePage() {
                 The Indian government has categorized goods and services into five major tax brackets:
               </p>
             </div>
-            <div className="overflow-hidden glass-card rounded-3xl border border-slate-200 dark:border-slate-800">
-              <table className="w-full text-left">
-                <thead className="bg-slate-50 dark:bg-slate-900">
-                  <tr className="text-slate-500 text-xs font-bold uppercase">
-                    <th className="px-6 py-4">Rate</th>
-                    <th className="px-6 py-4">Category</th>
-                    <th className="px-6 py-4">Examples</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
-                  {[
-                    { rate: '0%', cat: 'Exempted', ex: 'Milk, Bread, Eggs, Fresh Vegetables' },
-                    { rate: '5%', cat: 'Necessities', ex: 'Tea, Coffee, Spices, Sugar' },
-                    { rate: '12%', cat: 'Standard I', ex: 'Butter, Cheese, Ghee, Cell phones' },
-                    { rate: '18%', cat: 'Standard II', ex: 'Capital Goods, Industrial Items' },
-                    { rate: '28%', cat: 'Luxury', ex: 'Automobiles, High-end electronics' }
-                  ].map((row) => (
-                    <tr key={row.rate} className="hover:bg-slate-50/50 dark:hover:bg-slate-900/50 transition-colors">
-                      <td className="px-6 py-4 font-black text-indigo-600">{row.rate}</td>
-                      <td className="px-6 py-4 font-bold text-slate-900 dark:text-white">{row.cat}</td>
-                      <td className="px-6 py-4 text-slate-600 dark:text-slate-400">{row.ex}</td>
+            <div className="glass-card rounded-3xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+              <div className="overflow-x-auto">
+                <table className="w-full text-left whitespace-nowrap md:whitespace-normal">
+                  <thead className="bg-slate-50 dark:bg-slate-900">
+                    <tr className="text-slate-500 text-xs font-bold uppercase">
+                      <th className="px-6 py-4">Rate</th>
+                      <th className="px-6 py-4">Category</th>
+                      <th className="px-6 py-4">Examples</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                    {[
+                      { rate: '0%', cat: 'Exempted', ex: 'Milk, Bread, Eggs, Fresh Vegetables' },
+                      { rate: '5%', cat: 'Necessities', ex: 'Tea, Coffee, Spices, Sugar' },
+                      { rate: '12%', cat: 'Standard I', ex: 'Butter, Cheese, Ghee, Cell phones' },
+                      { rate: '18%', cat: 'Standard II', ex: 'Capital Goods, Industrial Items' },
+                      { rate: '28%', cat: 'Luxury', ex: 'Automobiles, High-end electronics' }
+                    ].map((row) => (
+                      <tr key={row.rate} className="hover:bg-slate-50/50 dark:hover:bg-slate-900/50 transition-colors">
+                        <td className="px-6 py-4 font-black text-indigo-600">{row.rate}</td>
+                        <td className="px-6 py-4 font-bold text-slate-900 dark:text-white">{row.cat}</td>
+                        <td className="px-6 py-4 text-slate-600 dark:text-slate-400">{row.ex}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </section>
 
