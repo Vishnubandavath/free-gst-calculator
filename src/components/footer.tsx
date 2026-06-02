@@ -9,7 +9,7 @@ const footerLinks = {
   product: [
     { name: 'GST Calculator', href: '/gst-calculator' },
     { name: 'Advanced GST', href: '/advanced-gst-calculator' },
-    { name: 'GST Guide', href: '/gst-guide' },
+    { name: 'Invoice Generator', href: '/invoice-generator' },
   ],
   resources: [
     { name: 'GST Slabs India', href: '/gst-slabs-india' },
