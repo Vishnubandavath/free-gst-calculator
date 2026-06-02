@@ -88,7 +88,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={cn(inter.variable, poppins.variable)}>
+    <html lang="en" suppressHydrationWarning className={cn(inter.variable, poppins.variable)} data-scroll-behavior="smooth">
       <head>
         {/* Google Analytics */}
         <Script
