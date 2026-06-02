@@ -15,7 +15,6 @@ const footerLinks = {
     { name: 'GST Slabs India', href: '/gst-slabs-india' },
     { name: 'Inclusive Formula', href: '/gst-inclusive-formula' },
     { name: 'Exclusive Formula', href: '/gst-exclusive-formula' },
-    { name: 'Registration Guide', href: '/gst-registration-guide' },
   ],
   support: [
     { name: 'FAQ', href: '/gst-faq' },

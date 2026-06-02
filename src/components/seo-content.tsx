@@ -58,7 +58,7 @@ const returnTypes = [
 export function SEOContent() {
   return (
     <div className="space-y-10 md:space-y-12">
-      <section className="rounded-[2rem] border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-950/40 p-6 md:p-8 lg:p-10 space-y-6">
+      <section className="rounded-4xl border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-950/40 p-6 md:p-8 lg:p-10 space-y-6">
         <div className="space-y-3 max-w-5xl">
           <p className="text-sm font-bold uppercase tracking-[0.2em] text-indigo-600 dark:text-indigo-400">
             GST Resource Center
@@ -123,7 +123,7 @@ export function SEOContent() {
       </section>
 
       <section className="grid grid-cols-1 xl:grid-cols-2 gap-6 md:gap-8">
-        <div id="inclusive-formula" className="space-y-5 rounded-[2rem] bg-slate-950 text-white p-6 md:p-8">
+        <div id="inclusive-formula" className="space-y-5 rounded-4xl bg-slate-950 text-white p-6 md:p-8">
           <div className="space-y-3">
             <h3 className="text-2xl md:text-3xl font-black">GST inclusive formula</h3>
             <p className="text-slate-300 leading-relaxed">
@@ -139,7 +139,7 @@ export function SEOContent() {
           </p>
         </div>
 
-        <div id="exclusive-formula" className="space-y-5 rounded-[2rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950/50 p-6 md:p-8">
+        <div id="exclusive-formula" className="space-y-5 rounded-4xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950/50 p-6 md:p-8">
           <div className="space-y-3">
             <h3 className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">
               GST exclusive formula
@@ -168,8 +168,8 @@ export function SEOContent() {
           </p>
         </div>
 
-        <div className="overflow-x-auto rounded-[2rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950/40">
-          <table className="w-full min-w-[720px] text-left border-collapse">
+        <div className="overflow-x-auto rounded-4xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950/40">
+          <table className="w-full min-w-180 text-left border-collapse">
             <thead>
               <tr className="bg-slate-50 dark:bg-slate-900/60 text-slate-900 dark:text-white">
                 <th className="px-6 py-4 text-sm font-bold uppercase tracking-wide">Slab</th>
@@ -282,7 +282,7 @@ export function SEOContent() {
           </div>
         </div>
 
-        <div id="gst-conclusion" className="rounded-[2rem] bg-gradient-to-br from-indigo-600 to-cyan-600 p-6 md:p-8 text-white space-y-4">
+        <div id="gst-conclusion" className="rounded-4xl bg-linear-to-br from-indigo-600 to-cyan-600 p-6 md:p-8 text-white space-y-4">
           <p className="text-sm font-bold uppercase tracking-[0.2em] text-indigo-100">
             Why It Matters
           </p>

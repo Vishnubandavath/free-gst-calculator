@@ -325,7 +325,7 @@ Calculated via VSNEXOS GST Calculator`;
       </div>
 
       {/* Professional PDF Report Template (Hidden from UI) */}
-      <div className="fixed left-[-9999px] top-0">
+      <div className="fixed -left-2499.75 top-0">
         <div 
           ref={pdfRef}
           className="w-[210mm] min-h-[297mm] p-[20mm] bg-white text-slate-900 font-sans"

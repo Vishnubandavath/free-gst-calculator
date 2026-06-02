@@ -444,7 +444,7 @@ export function AdvancedGSTCalculator() {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start lg:items-stretch">
         <div className="lg:col-span-7 flex">
-          <div className="glass-card rounded-[2rem] p-8 space-y-6 flex h-full w-full flex-col">
+          <div className="glass-card rounded-4xl p-8 space-y-6 flex h-full w-full flex-col">
             <h4 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
               <Percent size={20} className="text-indigo-600" />
               Advanced Options

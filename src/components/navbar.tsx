@@ -67,7 +67,7 @@ export function Navbar() {
                 <span className="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-[0.2em] leading-none block">
                   GST CALCULATOR
                 </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-shine pointer-events-none" />
+                <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/40 to-transparent animate-shine pointer-events-none" />
               </div>
             </div>
           </Link>

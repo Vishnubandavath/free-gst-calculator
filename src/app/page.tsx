@@ -3,20 +3,17 @@
 import React from 'react';
 import Link from 'next/link';
 import Script from 'next/script';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { 
    Calculator, 
    Zap, 
    ShieldCheck, 
    Smartphone, 
    ArrowRight, 
-   CheckCircle2, 
-   ChevronDown
+   CheckCircle2
  } from 'lucide-react';
-import { GSTCalculator } from '@/components/gst-calculator';
 import { homeFaqs, features } from '@/data/home-content';
 import { SEOContent } from '@/components/seo-content';
-import { cn } from '@/lib/utils';
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -34,8 +31,6 @@ const jsonLd = {
 };
 
 export default function HomePage() {
-  const [openFaq, setOpenFaq] = React.useState<number | null>(0);
-
   const faqLd = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -63,7 +58,7 @@ export default function HomePage() {
       />
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-8 md:pt-12 lg:pt-14 pb-10 md:pb-12 lg:pb-14 hero-gradient">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-indigo-500/10 blur-[120px] rounded-full -z-10" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-250 h-150 bg-indigo-500/10 blur-[120px] rounded-full -z-10" />
         
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-4xl mx-auto text-center space-y-5 md:space-y-6 mb-6 md:mb-8">
@@ -83,7 +78,7 @@ export default function HomePage() {
               className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black tracking-tight text-slate-900 dark:text-white"
             >
               Calculate GST with <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-cyan-500">
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-cyan-500">
                 Precision & Style.
               </span>
             </motion.h1>
@@ -127,7 +122,7 @@ export default function HomePage() {
 
       {/* Trust Indicators / Stats */}
       <section className="container mx-auto px-4 md:px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 p-5 md:p-7 glass-card rounded-[2rem] border-slate-200/50 dark:border-slate-800/50">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 p-5 md:p-7 glass-card rounded-4xl border-slate-200/50 dark:border-slate-800/50">
           {[
             { label: 'Calculations', value: '1M+' },
             { label: 'Accuracy', value: '100%' },
@@ -219,67 +214,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* FAQ Section 
-      <section className="container mx-auto px-4 md:px-6">
-        <div className="max-w-4xl mx-auto space-y-6 md:space-y-8">
-          <div className="text-center space-y-3">
-            <h2 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-slate-600 dark:text-slate-400 text-lg">
-              Everything you need to know about GST in India.
-            </p>
-          </div>
-
-          <div className="space-y-3 md:space-y-4">
-            {homeFaqs.map((faq, i) => (
-              <div 
-                key={i} 
-                className={cn(
-                  "rounded-2xl border transition-all duration-300",
-                  openFaq === i 
-                    ? "bg-white dark:bg-slate-900 border-indigo-200 dark:border-indigo-800 shadow-lg" 
-                    : "bg-slate-50 dark:bg-slate-900/50 border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700"
-                )}
-              >
-                <button
-                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className="w-full flex items-center justify-between p-5 md:p-6 text-left"
-                >
-                  <span className="text-lg font-bold text-slate-900 dark:text-white">{faq.question}</span>
-                  <div className={cn(
-                    "w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300",
-                    openFaq === i ? "bg-indigo-600 text-white rotate-180" : "bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400"
-                  )}>
-                    <ChevronDown size={20} />
-                  </div>
-                </button>
-                <AnimatePresence>
-                  {openFaq === i && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      className="overflow-hidden"
-                    >
-                      <div className="p-5 md:p-6 pt-0 text-slate-600 dark:text-slate-400 leading-relaxed">
-                        {faq.answer}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            ))}
-          </div>
-          
-          <div className="text-center pt-2">
-            <Link href="/gst-faq" className="inline-flex items-center gap-2 font-bold text-indigo-600 hover:underline">
-              View all 40+ FAQs <ArrowRight size={18} />
-            </Link>
-          </div>
-        </div>
-      </section>*/}
-
       {/* GST Resource Center - AdSense friendly high-quality content */}
       <section id="gst-resources" className="container mx-auto px-4 md:px-6 py-4 md:py-6">
         <div className="max-w-7xl mx-auto">
@@ -289,7 +223,7 @@ export default function HomePage() {
 
       {/* CTA Section */}
       <section className="container mx-auto px-4 md:px-6">
-        <div className="bg-gradient-to-br from-indigo-600 to-cyan-600 rounded-[2.5rem] md:rounded-[3rem] p-6 md:p-8 lg:p-10 text-center text-white relative overflow-hidden">
+        <div className="bg-linear-to-br from-indigo-600 to-cyan-600 rounded-[2.5rem] md:rounded-[3rem] p-6 md:p-8 lg:p-10 text-center text-white relative overflow-hidden">
           <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 blur-[100px] rounded-full -mr-48 -mt-48" />
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-cyan-400/20 blur-[100px] rounded-full -ml-48 -mb-48" />
           
