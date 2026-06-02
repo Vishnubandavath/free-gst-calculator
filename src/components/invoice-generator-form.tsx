@@ -456,7 +456,7 @@ export function InvoiceGeneratorForm() {
       </form>
 
       {/* Invoice Output Template (Rendered offscreen or scaled, visible on print only) */}
-      <div className="fixed left-[-9999px] top-0 print:relative print:left-0 no-print-bg">
+      <div className="fixed left-[-2499.75px] top-0 print:relative print:left-0 no-print-bg">
         <div
           ref={pdfRef}
           className="w-[210mm] min-h-[297mm] p-[20mm] bg-slate-950 text-slate-100 font-sans flex flex-col justify-between"
