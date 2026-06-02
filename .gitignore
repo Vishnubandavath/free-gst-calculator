@@ -84,3 +84,5 @@ docs/project-overview.md
 
 # typescript
 *.tsbuildinfo
+
+head_headers.txt
